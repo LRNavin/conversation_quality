@@ -14,7 +14,8 @@ def get_data_from_day(filename=const.dataset_name, day=1):
     print("Opening dataset - " + filename + " from Day - " + str(day))
     return open_dataset(filename)[day-1]
 
-def get_accel_data_from_participant(filename=const.dataset_name, day=1, participant_id=1):
+def get_accel_data_from_participant(filename=const.dataset_name,
+                                    day=1, participant_id=1):
     '''
     Participant Data Structure
     node - int
@@ -31,12 +32,15 @@ def get_accel_data_from_participant(filename=const.dataset_name, day=1, particip
             return member.accel
     return None
 
-def get_accel_data_from_participant_between(filename=const.dataset_name, day=1, participant_id=1, start_time=0, duration=10):
+def get_accel_data_from_participant_between(filename=const.dataset_name,
+                                            day=1, participant_id=1,
+                                            start_time=0, duration=10):
     '''
     start_time, duration in seconds
     returns numpy array - 1*t [t-time duration] t in sec/hertz -> 2 per sec
     '''
-    full_member_data  = np.array(get_accel_data_from_participant(filename=filename, day=day, participant_id=participant_id))
+    full_member_data  = np.array(get_accel_data_from_participant(filename=filename,
+                                                                 day=day, participant_id=participant_id))
     member_data_timed = full_member_data[(start_time*2):(start_time*2+duration*2), :]
     return member_data_timed
 
@@ -46,7 +50,8 @@ def get_members_in_f_form(group_id=1):
 def get_temporal_data_in_f_form(group_id=1):
     return None, None
 
-def get_accel_data_from_f_form(filename=const.dataset_name, day=1, group_id=1):
+def get_accel_data_from_f_form(filename=const.dataset_name,
+                               day=1, group_id=1):
     '''
     returns numpy array - n*t [n-number of participants, t-time duration]
     '''

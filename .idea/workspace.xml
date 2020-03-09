@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50d676cd-c199-4a32-8ab8-1860606fb780" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/data_experiment/scratch_pad.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/feature_extract/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/feature_extract/feature_preproc.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/feature_extract/statfeat_extractor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/feature_extract/synchrony_extractor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_experiment/nod_gesture_accel_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_experiment/nod_gesture_accel_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/data_plot_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/data_plot_util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/data_read_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/data_read_util.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,9 +89,53 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="scratch_pad" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="conversation_quality" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_experiment" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_experiment/scratch_pad.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="synchrony_extractor" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="conversation_quality" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/feature_extract" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/feature_extract/synchrony_extractor.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.nod_gesture_accel_test" />
+        <item itemvalue="Python.scratch_pad" />
+        <item itemvalue="Python.synchrony_extractor" />
         <item itemvalue="Python.data_read_util" />
       </list>
     </recent_temporary>
