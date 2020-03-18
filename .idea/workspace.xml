@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50d676cd-c199-4a32-8ab8-1860606fb780" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/data_experiment/scratch_pad.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/feature_extract/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/feature_extract/feature_preproc.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/feature_extract/statfeat_extractor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/feature_extract/synchrony_extractor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_experiment/nod_gesture_accel_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_experiment/nod_gesture_accel_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/data_plot_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/data_plot_util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/data_read_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/data_read_util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/feature_extract/synchrony_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/synchrony_extractor.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +39,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.nod_gesture_accel_test">
+  <component name="RunManager" selected="Python.synchrony_extractor">
     <configuration name="data_read_util" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="conversation_quality" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -133,9 +126,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.synchrony_extractor" />
         <item itemvalue="Python.nod_gesture_accel_test" />
         <item itemvalue="Python.scratch_pad" />
-        <item itemvalue="Python.synchrony_extractor" />
         <item itemvalue="Python.data_read_util" />
       </list>
     </recent_temporary>
