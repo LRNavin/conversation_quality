@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 start=0
-duration=10
+duration=40
 day=2
 participant_id_1=2
 participant_id_2=5
@@ -18,7 +18,7 @@ individual2_acc = reader.get_accel_data_from_participant_between(day=day, partic
                                                             start_time=start, duration=duration)[:,correl_axis]
 print(np.shape(individual1_acc))
 
-plotter.plot_accelerometer(accel_data=individual1_acc, x_lim=2*duration)
+plotter.plot_accelerometer(accel_data=individual1_acc, x_lim=duration)
 
 print(sync_extractor.get_correlation_between(individual1_acc, individual2_acc))
 
