@@ -1,18 +1,6 @@
-import pandas as pd
 import utilities.data_read_util as reader
 import constants
-import numpy as np
 import json
-
-# df = pd.DataFrame([10, 20, 15, 30, 45])
-#
-# print(df)
-# print(df.shift(-2))
-#
-# for i in range(0,4):
-#     print(i)
-
-# reader.get_annotated_fformations(constants.fform_annot_data)
 
 group_size_count = {}
 data = reader.get_annotated_fformations(constants.fform_annot_data)
