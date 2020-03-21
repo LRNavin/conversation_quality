@@ -6,6 +6,8 @@ dataset_file_path   = "Acceleration/"
 temp_storage_path   = "/Users/navinlr/Desktop/Thesis/code_base/conversation_quality/temporary_data_storage/"
 temp_dataset_store  = temp_storage_path + "dataset/"
 temp_fform_store    = temp_dataset_store + "groups.pickle"
+temp_grps_day       = temp_dataset_store + "groups_day"
+
 temp_grp_size_store = temp_dataset_store + "group_size.json"
 
 dataset_name        = "Mingle_30minSeg.mat"

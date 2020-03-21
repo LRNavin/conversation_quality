@@ -111,7 +111,10 @@ def get_annotated_fformations(annotation_file=const.fform_annot_data, from_store
         print("Spreadsheet contains %d sheet(s)." % len(doc.sheets))
         for i, sheet in enumerate(doc.sheets):
             print("Sheet - " + str(sheet.name))
-            groups[sheet.name] = data_processor.clean_fformation_data(process_annotation_sheet(sheet))
+            groups[sheet.name] = data_processor.add_column_fform_data(
+                                    data_processor.clean_fformation_data(
+                                        process_annotation_sheet(sheet)))
+            groups[sheet.name].to_csv(const.temp_grps_day+str(i+1)+".csv")
             # print(groups[sheet.name])
     return groups
 
