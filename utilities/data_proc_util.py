@@ -61,5 +61,9 @@ def add_column_fform_data(data, col_name="time-duration"):
         buffer_diff = data["timeend"] - data["timestart"]
         data["duration_mins"] = (buffer_diff / np.timedelta64(1, 'm')).round(2)
         data["duration_secs"] = buffer_diff / np.timedelta64(1, 's')
+    if col_name == "final":
+        buffer_diff = (data["sampleend"] - data["samplestart"])/20
+        data["duration_secs"] = buffer_diff
+        data["duration_mins"] = (buffer_diff/60).round(2)
     return data
 

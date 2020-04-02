@@ -2,9 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50d676cd-c199-4a32-8ab8-1860606fb780" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/annotations/create_annotate_folder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_experiment/group_size_duration.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic_experiment/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic_experiment/final_videos_stat.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_analysis/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modeling/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_experiment/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/annotations/analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_experiment/get_group_size_stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic_experiment/get_group_size_stats.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_experiment/group_size_duration.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic_experiment/group_size_duration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_experiment/nod_gesture_accel_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic_experiment/nod_gesture_accel_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_experiment/scratch_pad.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic_experiment/scratch_pad.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/group_size.json" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/dataset/group_size.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/groups.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/dataset/groups.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/groups_day3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/dataset/groups_day3.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/data_proc_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/data_proc_util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/data_read_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/data_read_util.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,8 +38,13 @@
   <component name="ProjectId" id="1VFPbt8Wlfz5juV9PgKcvGCE14J" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../TA-MMA/code_base/mma-lab" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/temporary_data_storage/dataset" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/temporary_data_storage/dataset" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -40,7 +58,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.group_size_duration">
+  <component name="RunManager" selected="Python.final_videos_stat">
     <configuration name="create_annotate_folder" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="conversation_quality" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -54,6 +72,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/annotations/create_annotate_folder.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="final_videos_stat" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="conversation_quality" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_experiment" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_experiment/final_videos_stat.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -104,27 +143,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="nod_gesture_accel_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="conversation_quality" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_experiment" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_experiment/nod_gesture_accel_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="scratch_pad" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="conversation_quality" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -148,11 +166,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.final_videos_stat" />
         <item itemvalue="Python.group_size_duration" />
-        <item itemvalue="Python.create_annotate_folder" />
-        <item itemvalue="Python.get_group_size_stats" />
         <item itemvalue="Python.scratch_pad" />
-        <item itemvalue="Python.nod_gesture_accel_test" />
+        <item itemvalue="Python.get_group_size_stats" />
+        <item itemvalue="Python.create_annotate_folder" />
       </list>
     </recent_temporary>
   </component>

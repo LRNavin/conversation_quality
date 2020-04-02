@@ -78,6 +78,7 @@ def get_accel_data_from_f_form(filename=const.dataset_name,
 
 def process_annotation_sheet(sheet):
     df_dict={}
+    print(type(sheet))
     for i, row in enumerate(sheet.rows()):
         # row is a list of cells
         # assume the header is on the first row

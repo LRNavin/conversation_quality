@@ -8,6 +8,9 @@ temp_dataset_store  = temp_storage_path + "dataset/"
 temp_fform_store    = temp_dataset_store + "groups.pickle"
 temp_grps_day       = temp_dataset_store + "groups_day"
 
+final_grps_data     = temp_dataset_store + "all_groups_final.csv"
+final_grps_raw_data = temp_dataset_store + "final_groups_raw.csv"
+
 temp_grp_size_store = temp_dataset_store + "group_size.json"
 
 dataset_name        = "Mingle_30minSeg.mat"
