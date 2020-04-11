@@ -35,43 +35,55 @@ def get_accel_data_from_participant(filename=const.dataset_name,
     day_data = get_data_from_day(filename, day)
     for member in day_data:
         if str(member.participant) == str(participant_id):
-            print("Found Participant")
+            print("Found Participant's ("+ str(participant_id) +")"+ " Accelero, ")
             return member.accel
     return None
 
-def get_accel_data_from_participant_between(filename=const.dataset_name,
-                                            day=1, participant_id=1,
+def get_accel_data_from_participant_between(filename=const.dataset_name, day=1, participant_id=1,
                                             start_time=0, duration=10):
     '''
     start_time, duration in sample rates(hz) i.e 1 sec = 20 samples
     returns numpy array - 1*t [t-time duration] t in hertz -> 20 per sec
     '''
-    full_member_data  = np.array(get_accel_data_from_participant(filename=filename,
-                                                                 day=day, participant_id=participant_id))
+
+    full_member_data  = np.array(get_accel_data_from_participant(filename=filename, day=day,
+                                                                 participant_id=participant_id))
+    print("From: " + str(start_time) + ", For: " + str(duration))
     member_data_timed = full_member_data[(start_time):(start_time+duration), :]
+    # print(member_data_timed.shape)
     return member_data_timed
 
-def get_members_in_f_form(day=1, group_id=0):
-    return get_annotated_fformations()['Day'+str(day)].loc[[group_id]]['subjects'].values[0]
+def get_all_annotated_groups():
+    return get_annotated_fformations(annotation_file=const.fform_gt_data, from_final_annotations=True)
 
-def get_temporal_data_in_f_form(day=1, group_id=0):
-    group_data = get_annotated_fformations()['Day'+str(day)].loc[[group_id]]
-    start, end = group_data['samplestart'].values[0], group_data['sampleend'].values[0]
+def get_group_data(group_id="1_000"):
+    groups_df = get_all_annotated_groups()
+    groups_df["subjects"] = data_processor.clean_subjects_list(groups_df["subjects"])
+    group = groups_df.loc[groups_df["groupid"] == group_id]
+    return group
+
+def get_members_in_f_form(group_id="1_000"):
+    return get_group_data(group_id)['subjects'].values[0]
+
+def get_temporal_data_in_f_form(group_id="1_000"):
+    group = get_group_data(group_id)
+    start, end = group['samplestart'].values[0], group['sampleend'].values[0]
     return start, end-start
 
-def get_accel_data_from_f_form(filename=const.dataset_name,
-                               day=1, group_id=0):
+def get_accel_data_from_f_form(filename=const.dataset_name, group_id="1_000"):
     '''
-    returns numpy array - n*t [n-number of participants, t-time duration]
+    returns numpy array - n*t [nFound Participant's Accelero-number of participants, t-time duration]
     '''
-    group_members       = get_members_in_f_form(day, group_id)
-    start_time, duration = get_temporal_data_in_f_form(day, group_id)
-    print("Fetching Data for Group - " + str(group_id) + ", Day-" + str(day) + ", Members - " + str(group_members))
+    day = int(group_id.split('_')[0])
+    group_members       = get_members_in_f_form(group_id)
+    start_time, duration = get_temporal_data_in_f_form(group_id)
+    print("Fetching Data for Group - " + str(group_id) + ", Members - " + str(group_members))
+
     # Init group accel array - np
     group_accel = {}#np.empty((len(group_members), duration), int)
     for member in group_members:
-        member_accel = get_accel_data_from_participant_between(filename=filename, day=day,
-                                                               participant_id=member, start_time=start_time,
+        member_accel = get_accel_data_from_participant_between(filename=filename, day=day, participant_id=member,
+                                                               start_time=start_time,
                                                                duration=duration)
         group_accel[member] = member_accel #np.append(group_accel, member_accel)
     return group_accel
@@ -101,22 +113,24 @@ def process_annotation_sheet(sheet):
     sheet_data = pd.DataFrame(df_dict)
     return sheet_data
 
-def get_annotated_fformations(annotation_file=const.fform_annot_data, from_store=True):
+def get_annotated_fformations(annotation_file=const.fform_annot_data, from_final_annotations=False, from_store=True):
     groups={}
-    if from_store:
-        with open(const.temp_fform_store, 'rb') as data_store:
-            groups = pickle.load(data_store)
+    if from_final_annotations:
+        groups = pd.read_csv(annotation_file)
     else:
-        # load a file
-        doc = ezodf.opendoc(annotation_file)
-        print("Spreadsheet contains %d sheet(s)." % len(doc.sheets))
-        for i, sheet in enumerate(doc.sheets):
-            print("Sheet - " + str(sheet.name))
-            groups[sheet.name] = data_processor.add_column_fform_data(
-                                    data_processor.clean_fformation_data(
-                                        process_annotation_sheet(sheet)))
-            groups[sheet.name].to_csv(const.temp_grps_day+str(i+1)+".csv")
-            # print(groups[sheet.name])
+        if from_store:
+            with open(const.temp_fform_store, 'rb') as data_store:
+                groups = pickle.load(data_store)
+        else:
+            # load a file
+            doc = ezodf.opendoc(annotation_file)
+            print("Spreadsheet contains %d sheet(s)." % len(doc.sheets))
+            for i, sheet in enumerate(doc.sheets):
+                print("Sheet - " + str(sheet.name))
+                groups[sheet.name] = data_processor.add_column_fform_data(
+                                        data_processor.clean_fformation_data(
+                                            process_annotation_sheet(sheet)))
+                groups[sheet.name].to_csv(const.temp_grps_day+str(i+1)+".csv")
     return groups
 
 def clean_and_store_fform_annotations(annotation_file):
