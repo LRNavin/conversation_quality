@@ -5,6 +5,7 @@ import feature_extract.statistics_extractor as base_feat_extractor
 import feature_extract.synchrony_extractor as sync_extractor
 import feature_extract.convergence_extractor as conv_extractor
 import feature_extract.features_postproc as post_processor
+import feature_extract.group_features_extractor as group_feat_extractor
 
 import constants
 import numpy as np
@@ -115,7 +116,15 @@ else:
     print("Pairs -> " + str(group_pairwise_features.keys()))
 
     for pair in group_pairwise_features.keys():
-        print("# FEATURES per PAIR = " + str(len(group_pairwise_features[pair])))
+        feat_len = len(group_pairwise_features[pair])
+        print("# FEATURES per PAIR = " + str(feat_len))
+
+    group_level_features = group_feat_extractor.aggregate_to_group_features(pairwise_features=group_pairwise_features)
+    print("# Group-Level Features = " + str(len(group_level_features)))
+
+
+
+
 
     # from sklearn import mixture
     #
