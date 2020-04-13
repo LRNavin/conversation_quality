@@ -2,6 +2,10 @@ import pandas as pd
 import utilities.data_read_util as reader
 import feature_extract.feature_preproc as processor
 import feature_extract.statistics_extractor as base_feat_extractor
+import feature_extract.synchrony_extractor as sync_extractor
+import feature_extract.convergence_extractor as conv_extractor
+import feature_extract.features_postproc as post_processor
+
 import constants
 import numpy as np
 import json
@@ -60,7 +64,7 @@ import shutil
 from scipy import signal
 import json
 
-if True:
+if False:
     all_groupids = reader.get_all_annotated_groups()["groupid"].values
     errored_groups = []
 
@@ -87,6 +91,42 @@ if True:
         break
 
     print("Total Errored Groups (Missing Acc) = " + str(len(errored_groups)))
+else:
+    group_id = "1_018"
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~ FOR GROUP - " + str(group_id) + " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    # Reading Accelerometer Channels - RAW, ABS, MAG
+    group_acc = processor.get_accelerometer_channels_for(group_id=group_id, channels=["abs", "mag"])
+    # Extract Base Statistical, Spectral Features
+    group_acc = base_feat_extractor.get_base_features_for(group_accel_data=group_acc,
+                                                                       stat_features=["mean", "var"],
+                                                                       spec_features=["psd"],
+                                                                       windows=[1, 5, 10, 15], step_size=0.5)
+    # Extract Synchrony features
+    group_pairwise_sync = sync_extractor.get_synchrony_features_for(group_acc, features=["correl", "lag-correl", "mi", "norm-mi", "mimicry"])
+    # Extract Convergence features
+    group_pairwise_conv = conv_extractor.get_convergence_features_for(group_acc, features=["sym-conv", "asym-conv", "global-conv"])
+
+
+    group_pairwise_features = post_processor.concatenate_pairwise_features(group_pairwise_sync, group_pairwise_conv)
+
+
+    print("~~~~~~~~~~ FINAL PAIRWISE FEATUERS ~~~~~~~~~~")
+    print("# Pairwise Features = " + str(len(group_pairwise_features.keys())))
+    print("Pairs -> " + str(group_pairwise_features.keys()))
+
+    for pair in group_pairwise_features.keys():
+        print("# FEATURES per PAIR = " + str(len(group_pairwise_features[pair])))
+
+    # from sklearn import mixture
+    #
+    # data = list(range(0, 100))
+    # print(data)
+    # data = np.array(data).reshape(-1, 1)
+    # # print(data)
+    # clf = mixture.GaussianMixture(n_components=1, covariance_type='full')
+    # clf.fit(data)
+
+
 
 import matplotlib.pyplot as plt
 

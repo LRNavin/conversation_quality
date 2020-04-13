@@ -1,9 +1,6 @@
-import scipy.stats as scipy_stat
-from scipy.spatial import distance
 from pyitlib import discrete_random_variable as drv
-import sklearn
+import feature_extract.mimicry_model as mimicry_extractor
 
-import pandas as pd
 import numpy as np
 
 def get_mutual_info_between(individual1_acc, individual2_acc, norm=True):
@@ -23,99 +20,105 @@ def get_mutual_info_between(individual1_acc, individual2_acc, norm=True):
     '''
 
     print("Calculating mutual-info.....")
-    if norm:
-        mi = drv.information_mutual_normalised(individual1_acc, individual2_acc, 'SQRT')
-    else:
-        mi = drv.information_mutual(individual1_acc, individual2_acc)
+    mi=[]
+    for segment in range(individual1_acc.shape[1]):
+        indiv1_acc = individual1_acc[:,segment]
+        indiv2_acc = individual2_acc[:,segment]
+        if norm:
+            curr_mi = drv.information_mutual_normalised(indiv1_acc, indiv2_acc, 'SQRT')
+        else:
+            curr_mi = drv.information_mutual(indiv1_acc, indiv2_acc)
+        mi.append(curr_mi)
+
     return mi
 
-def get_timelagged_correl_between(individual1_acc, individual2_acc, lag=0):
+def get_timelagged_correlation_between(individual1_acc, individual2_acc, inverted=False, lag=0):
     '''
     Lag-N Pearson correlation.
     Result: correl (float)
     '''
-    print("Calculating cross-correlations with LAG-" + str(lag) + "....")
 
-    mean_x = np.mean(individual1_acc)
-    mean_y = np.mean(individual2_acc)
-    std_x  = np.std(individual1_acc)
-    std_y  = np.std(individual2_acc)
+    #Below Segmentation is kinda expensive and not efficient. But sticking to it for segment-wise tests/readability
+    if inverted:
+        print("Calculating correlations with LAG- -" + str(lag) + "....")
+    else:
+        print("Calculating correlations with LAG- " + str(lag) + "....")
 
-    mean_diff = 0
-    counter = 0
-    for i in range(0,len(individual1_acc)-lag):
-        x_i = individual1_acc[i]
-        y_i = individual2_acc[i+lag]
-        mean_diff = mean_diff + ((x_i-mean_x)*(y_i-mean_y))
-        counter = counter+1
-    mean_diff = mean_diff/counter
-    lagged_correlation = mean_diff/(std_x*std_y)
+    lagged_correlation=[]
+    for segment in range(individual1_acc.shape[1]):
+        indiv1_acc = individual1_acc[:, segment]
+        indiv2_acc = individual2_acc[:, segment]
+
+        curr_lagged_correlation = extract_correlation_between(indiv1_acc, indiv2_acc, lag)
+        lagged_correlation.append(curr_lagged_correlation)
 
     return lagged_correlation
 
+def extract_correlation_between(indiv1_acc, indiv2_acc, lag=0):
+    mean_x = np.mean(indiv1_acc)
+    mean_y = np.mean(indiv2_acc)
+    std_x = np.std(indiv1_acc)
+    std_y = np.std(indiv2_acc)
+
+    mean_diff = 0
+    counter = 0
+    for i in range(0, len(indiv1_acc) - lag):
+        x_i = indiv1_acc[i]
+        y_i = indiv2_acc[i + lag]
+        mean_diff = mean_diff + ((x_i - mean_x) * (y_i - mean_y))
+        counter = counter + 1
+    mean_diff = mean_diff / counter
+
+    curr_lagged_correlation = mean_diff / (std_x * std_y)
+    return curr_lagged_correlation
 
 def get_correlation_between(individual1_acc, individual2_acc):
-    print("Calculating correlations.....")
+    # print("Calculating correlations.....")
     # correlation, p_value = scipy_stat.pearsonr(individual1_acc, individual2_acc)
-    correlation = get_timelagged_correl_between(individual1_acc, individual2_acc)
+    correlation = get_timelagged_correlation_between(individual1_acc, individual2_acc)
     return correlation
 
-def get_distance_between(individual1_acc, individual2_acc, metric='euc'):
-    distance_i = 0
-    if metric == 'euc':
-        distance_i = distance.euclidean(individual1_acc, individual2_acc)
-    elif metric == 'city':
-        distance_i = distance.cityblock(individual1_acc, individual2_acc)
-    elif metric == 'cosine':
-        distance_i = distance.cosine(individual1_acc, individual2_acc)
-    else:
-        #l1-norm , same as city ...
-        distance_i = np.sum(np.abs(individual1_acc - individual2_acc))
+def get_features_for(individual1_data, individual2_data, features):
+    synchrony_features = []
+    for feature in features:
+        print("---- Extracting Synchrony Features ----> " + feature)
+        synchrony_windowed_feature = []
+        for window in individual1_data.keys():
+            curr_window_data1 = individual1_data[window]
+            curr_window_data2 = individual2_data[window]
 
-    return distance_i
+            if feature == "correl":
+                synchrony_windowed_feature.extend(get_correlation_between(curr_window_data1, curr_window_data2))
+            elif feature == "lag-correl":
+                #+1 Lag -> Lag to INDIV 2 i.e Test for Indiv 2 as follower and Indiv 1 as driver
+                synchrony_windowed_feature.extend(get_timelagged_correlation_between(curr_window_data1, curr_window_data2, inverted=False, lag=1))
+                #-1 Lag -> Inverted
+                synchrony_windowed_feature.extend(get_timelagged_correlation_between(curr_window_data2, curr_window_data1, inverted=True, lag=1))
+            elif feature == "mi":
+                synchrony_windowed_feature.extend(get_mutual_info_between(curr_window_data1, curr_window_data2, norm=False))
+            elif feature == "norm-mi":
+                synchrony_windowed_feature.extend(get_mutual_info_between(curr_window_data1, curr_window_data2, norm=True))
+            elif feature == "mimicry":
+                synchrony_windowed_feature.extend(mimicry_extractor.get_mimicry_features(curr_window_data1, curr_window_data2, model_type="sq-distance"))
 
-def get_correlation_with_time(distance_array):
-    '''
-    Correlation returned is expected to be more negative for converging interactions (-vely correlated with Time),
-    meaning that the participants tend to show similar behavior over time
-    '''
-    return get_correlation_between(distance_array, np.arange(len(distance_array)))
+        synchrony_features.extend(synchrony_windowed_feature)
 
-def get_symmetric_convergence_between(individual1, individual2, metric='euc'):
-    '''
-    Correlation returned is expected to be more negative for converging interactions (-vely correlated with Time),
-    meaning that the participants tend to show similar behavior over time
-    '''
-    distance_array = []
-    for i in range(0, individual1.shape[0]): #i.e For each sample of Person 1 and 2
-        indiv1_sample = individual1[i,:]
-        indiv2_sample = individual2[i,:]
-        distance_array.append(get_distance_between(indiv1_sample, indiv2_sample, metric))
+    return np.array(synchrony_features)
 
-    # Correlation between Time and Evolving Distance ->
-    convergence = get_correlation_with_time(distance_array)
-    return convergence
+# Main Extractor
+def get_synchrony_features_for(group_accel_data, features=["correl", "lag-correl", "mi", "norm-mi", "mimicry"]):
+    group_pairwise_features = {}
+    members = group_accel_data.keys()
+    for member1 in members:
+        for member2 in members:
+            # No Same Person and Not same pair if already calculated
+            if member1 != member2 and (str(member2)+"_"+str(member1) not in group_pairwise_features.keys()):
+                print("For Members - " + str(member1) + " and " + str(member2))
+                pairwise_features = get_features_for(group_accel_data[member1], group_accel_data[member2], features)
+                print("Pairwise-Feature Shape = " + str(pairwise_features.shape))
+                group_pairwise_features[str(member1)+"_"+str(member2)] = pairwise_features
+    # print("# Pairwise Features = " + str(len(group_pairwise_features.keys())))
+    # print("Pairs -> " + str(group_pairwise_features.keys()))
 
+    return group_pairwise_features
 
-def learn_mixuture_gaussian_model(individual_acc, n_components=2, covariance_type='full'):
-    # TODO: Implement Model selection - USing BIC
-    model = sklearn.mixture.GaussianMixture(n_components, covariance_type).fit(individual_acc)
-    return model
-
-def get_log_likelihood_in_model(model, individual_acc):
-    distance_array=[]
-    for samples in individual_acc:
-        distance_array.append(model.score(samples))
-    return distance_array
-
-def get_asymmetric_convergence_between(individual1, individual2, model=None, learning_period = 1, metric='euc'):
-    '''
-        Correlation returned is expected to be more negative for converging interactions (-vely correlated with Time),
-        meaning that the participants tend to show similar behavior over time
-    '''
-    #TODO : Check Dimension of features and samples
-    if model is None:
-        model = learn_mixuture_gaussian_model(individual1)
-    distance_array = get_log_likelihood_in_model(model, individual2)
-    convergence = get_correlation_with_time(distance_array)
-    return convergence
