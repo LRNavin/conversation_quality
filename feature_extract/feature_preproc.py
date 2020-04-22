@@ -19,15 +19,21 @@ def get_raw_accelerometer_for(group_id):
 def add_abs_accelerometer_for(group_acc):
     for member in group_acc.keys():
         raw_member_acc = group_acc[member]
-        abs_member_acc = np.absolute(raw_member_acc)
-        group_acc[member] = np.concatenate((raw_member_acc, abs_member_acc), axis=1)
+        if len(raw_member_acc) != 0:
+            abs_member_acc = np.absolute(raw_member_acc)
+            group_acc[member] = np.concatenate((raw_member_acc, abs_member_acc), axis=1)
+        else:
+            group_acc[member] = np.array(raw_member_acc)
     return group_acc
 
 def add_mag_accelerometer_for(group_acc):
     for member in group_acc.keys():
         raw_member_acc = group_acc[member]
-        mag_member_acc = np.sqrt(np.square(raw_member_acc[:,0]) + np.square(raw_member_acc[:,1]) + np.square(raw_member_acc[:,2]))
-        group_acc[member] = np.concatenate((raw_member_acc, mag_member_acc[:, None]), axis=1)
+        if len(raw_member_acc) != 0:
+            mag_member_acc = np.sqrt(np.square(raw_member_acc[:,0]) + np.square(raw_member_acc[:,1]) + np.square(raw_member_acc[:,2]))
+            group_acc[member] = np.concatenate((raw_member_acc, mag_member_acc[:, None]), axis=1)
+        else:
+            group_acc[member] = np.array(raw_member_acc)
     return group_acc
 
 # Get all Channels

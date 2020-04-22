@@ -9,7 +9,7 @@ def get_aggregate_features_for_mimicry(distance_array, features=[min, max, mean,
         mimicry_features.append(feature(distance_array))
     return mimicry_features
 
-#TODO: Nanninga et al. Mixture Gauss based Mimicry,
+#Nanninga et al. -> IMplemented for Convergence Mixture Gauss based Mimicry,
 def learn_mixuture_gaussian_model(individual_acc, n_components=1, covariance_type='full'):
     # TODO: Implement Model selection - USing BIC
     model = mixture.GaussianMixture(n_components=n_components, covariance_type=covariance_type).fit(individual_acc)

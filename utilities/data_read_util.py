@@ -49,8 +49,10 @@ def get_accel_data_from_participant_between(filename=const.dataset_name, day=1, 
     full_member_data  = np.array(get_accel_data_from_participant(filename=filename, day=day,
                                                                  participant_id=participant_id))
     print("From: " + str(start_time) + ", For: " + str(duration))
-    member_data_timed = full_member_data[(start_time):(start_time+duration), :]
-    # print(member_data_timed.shape)
+    if len(full_member_data) == 0:
+        member_data_timed = full_member_data
+    else:
+        member_data_timed = full_member_data[(start_time):(start_time+duration), :]
     return member_data_timed
 
 def get_all_annotated_groups():
@@ -139,5 +141,9 @@ def clean_and_store_fform_annotations(annotation_file):
         pickle.dump(groups, data_store, protocol=pickle.HIGHEST_PROTOCOL)
     return True
 
-
-
+def count_missing_accelero(group_acc):
+    count=0
+    for member in group_acc.keys():
+        if len(group_acc[member]) == 0:
+            count = count + 1
+    return count

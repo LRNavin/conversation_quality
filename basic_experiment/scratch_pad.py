@@ -93,38 +93,58 @@ if False:
 
     print("Total Errored Groups (Missing Acc) = " + str(len(errored_groups)))
 else:
-    group_id = "1_018"
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~ FOR GROUP - " + str(group_id) + " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    # Reading Accelerometer Channels - RAW, ABS, MAG
-    group_acc = processor.get_accelerometer_channels_for(group_id=group_id, channels=["abs", "mag"])
-    # Extract Base Statistical, Spectral Features
-    group_acc = base_feat_extractor.get_base_features_for(group_accel_data=group_acc,
-                                                                       stat_features=["mean", "var"],
-                                                                       spec_features=["psd"],
-                                                                       windows=[1, 5, 10, 15], step_size=0.5)
-    # Extract Synchrony features
-    group_pairwise_sync = sync_extractor.get_synchrony_features_for(group_acc, features=["correl", "lag-correl", "mi", "norm-mi", "mimicry"])
-    # Extract Convergence features
-    group_pairwise_conv = conv_extractor.get_convergence_features_for(group_acc, features=["sym-conv", "asym-conv", "global-conv"])
+
+    all_groupids = reader.get_all_annotated_groups()["groupid"].values
+
+    temp_checklist = {
+        "group_ids":all_groupids,
+        "member_count":[0] * len(all_groupids),
+        "missing_acc":[0] * len(all_groupids)
+    }
+    group_acc_checklist = pd.DataFrame (temp_checklist, columns = ["group_ids", "member_count", "missing_acc"])
+
+    # group_id = "1_018"
+    for group_id in all_groupids:
+
+        members = reader.get_members_in_f_form(group_id)
+
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~ FOR GROUP - " + str(group_id) + " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        # Reading Accelerometer Channels - RAW, ABS, MAG
+        group_acc = processor.get_accelerometer_channels_for(group_id=group_id, channels=["abs", "mag"])
+
+        # Decision/Analysis on Missing Accelerations
+        #1. set groups data
+        group_acc_checklist.loc[group_acc_checklist["group_ids"] == str(group_id), "member_count"] = len(members)
+        group_acc_checklist.loc[group_acc_checklist["group_ids"] == str(group_id), "missing_acc"] = reader.count_missing_accelero(group_acc)
 
 
-    group_pairwise_features = post_processor.concatenate_pairwise_features(group_pairwise_sync, group_pairwise_conv)
+        if False:#group_acc_checklist.loc[str(group_id)]["missing_acc"] ==0: # Continue only when all ACC are available
+            # Extract Base Statistical, Spectral Features
+            group_acc = base_feat_extractor.get_base_features_for(group_accel_data=group_acc,
+                                                                               stat_features=["mean", "var"],
+                                                                               spec_features=["psd"],
+                                                                               windows=[1, 5, 10, 15], step_size=0.5)
+            # Extract Synchrony features
+            group_pairwise_sync = sync_extractor.get_synchrony_features_for(group_acc, features=["correl", "lag-correl", "mi", "norm-mi", "mimicry"])
+            # Extract Convergence features
+            group_pairwise_conv = conv_extractor.get_convergence_features_for(group_acc, features=["sym-conv", "asym-conv", "global-conv"])
 
 
-    print("~~~~~~~~~~ FINAL PAIRWISE FEATUERS ~~~~~~~~~~")
-    print("# Pairwise Features = " + str(len(group_pairwise_features.keys())))
-    print("Pairs -> " + str(group_pairwise_features.keys()))
-
-    for pair in group_pairwise_features.keys():
-        feat_len = len(group_pairwise_features[pair])
-        print("# FEATURES per PAIR = " + str(feat_len))
-
-    group_level_features = group_feat_extractor.aggregate_to_group_features(pairwise_features=group_pairwise_features)
-    print("# Group-Level Features = " + str(len(group_level_features)))
+            group_pairwise_features = post_processor.concatenate_pairwise_features(group_pairwise_sync, group_pairwise_conv)
 
 
+            print("~~~~~~~~~~ FINAL PAIRWISE FEATUERS ~~~~~~~~~~")
+            print("# Pairwise Features = " + str(len(group_pairwise_features.keys())))
+            print("Pairs -> " + str(group_pairwise_features.keys()))
 
+            for pair in group_pairwise_features.keys():
+                feat_len = len(group_pairwise_features[pair])
+                print("# FEATURES per PAIR = " + str(feat_len))
 
+            group_level_features = group_feat_extractor.aggregate_to_group_features(pairwise_features=group_pairwise_features)
+            print("# Group-Level Features = " + str(len(group_level_features)))
+
+    group_acc_checklist.to_csv(constants.missing_acc_stat, index=False)
 
     # from sklearn import mixture
     #
