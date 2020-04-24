@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50d676cd-c199-4a32-8ab8-1860606fb780" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/annotations/annotation_cleaner.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dataset_creation/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dataset_creation/dataset_creator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modeling/.ipynb_checkpoints/autoencoders_test-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modeling/autoencoders_test.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/annotations/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/annotations/analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic_experiment/scratch_pad.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic_experiment/scratch_pad.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/annotations/annotation_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/annotations/annotation_cleaner.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/basic_experiment/scratch_pad_tester.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic_experiment/scratch_pad_tester.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic_experiment/script_dumps.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic_experiment/script_dumps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feature_extract/feature_preproc.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/feature_preproc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feature_extract/mimicry_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/mimicry_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/data_read_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/data_read_util.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

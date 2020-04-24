@@ -2,8 +2,9 @@ import numpy as np
 from scipy import stats
 from distutils.dir_util import copy_tree
 import shutil
-import constants
+import constants as const
 import pandas as pd
+import pickle
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -13,7 +14,7 @@ do_missing_stat = False
 
 
 if do_missing_stat:
-    missign_acc_checklist = pd.read_csv(constants.missing_acc_stat)
+    missign_acc_checklist = pd.read_csv(const.missing_acc_stat)
 
     sns.distplot(missign_acc_checklist.percent_miss, bins=10, kde=False, rug=True).set_title('Percentage of Missing Accelero Data. (#MissingIndiv/#IndivInGroup)')
     plt.show()
@@ -29,4 +30,7 @@ if do_missing_stat:
     f.suptitle("Missing Data Statistics")
     plt.show()
 
-
+# with open(const.temp_fform_store, 'rb') as data_store:
+#     pd.options.display.max_columns = None
+#     groups = pickle.load(data_store)
+#     print(groups["Day2"][:2])

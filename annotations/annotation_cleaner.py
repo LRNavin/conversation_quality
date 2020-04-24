@@ -5,14 +5,25 @@ import constants
 import pandas as pd
 import numpy as np
 
-conversion_dict = {
-"Strongly disagree" : 0,
-"Disagree" : 1,
-"Neutral" : 2,
-"Agree" : 3,
-"Strongly Agree" : 4,
-"Strongly agree" : 4
+normal_conversion_dict = {
+"Strongly disagree" : 1,
+"Disagree" : 2,
+"Neutral" : 3,
+"Agree" : 4,
+"Strongly Agree" : 5,
+"Strongly agree" : 5
 }
+
+reverse_conversion_dict = {
+
+"Strongly Agree" : 1,
+"Strongly agree" : 1,
+"Agree" : 2,
+"Neutral" : 3,
+"Disagree" : 4,
+"Strongly disagree" : 5
+}
+
 
 # Group Questions - Not Used - Used only for reverse scale
 
@@ -81,25 +92,32 @@ def sanity_check_responses(annotator_annotations, manifestation):
     return True, cleaned_annotation
 
 
-def convert_annotations_to_int(annotation):
-    int_value = conversion_dict[annotation]
+def convert_normal_annotations_to_int(annotation):
+    int_value = normal_conversion_dict[annotation]
     return int_value
 
-def clean_annotations(raw_annotations, manifestation):
+def convert_reverse_annotations_to_int(annotation):
+    int_value = reverse_conversion_dict[annotation]
+    return int_value
+
+def clean_annotations(raw_annotations, manifestation, reverse_scale):
     if manifestation == "group":
         column_omit = ["Annotator Name", "Group ID"]
+        reverse_sca = [gq3]
     else:
         column_omit = ["Annotator Name", "Group ID", "Individual ID"]
+        reverse_sca = [iq3, iq5, iq10]
 
     cleaned_annotation = raw_annotations.copy(deep=False)
     for column in cleaned_annotation:
         if column not in column_omit:
-            # print("Column Name - " + column)
-            cleaned_annotation[column] = cleaned_annotation[column].apply(convert_annotations_to_int)
-            if column in [gq3, iq3, iq5, iq10]:
-                cleaned_annotation[column] = cleaned_annotation[column]-4
-                cleaned_annotation[column] = cleaned_annotation[column].abs()
-
+            if reverse_scale:
+                if column in reverse_sca: #Reverse Scale
+                    cleaned_annotation[column] = cleaned_annotation[column].apply(convert_reverse_annotations_to_int)
+                else:
+                    cleaned_annotation[column] = cleaned_annotation[column].apply(convert_normal_annotations_to_int)
+            else:
+                cleaned_annotation[column] = cleaned_annotation[column].apply(convert_normal_annotations_to_int)
     return cleaned_annotation
 
 def normalize_annotator_bias_for(group_annotations):
@@ -120,11 +138,11 @@ def calcualte_convq_score_for(cleaned_annotation, manifestation="group"):
         scored_annotations["indiv_convq"] = normalize_annotator_bias_for(scored_annotations["indiv_convq"].values)
     return scored_annotations
 
-def derive_convq_scores_for_reponses(annotation_file=constants.group_conq_annot_data, manifestation="group", calculate_convq=True):
+def derive_convq_scores_for_reponses(annotation_file=constants.group_conq_annot_data, manifestation="group", calculate_convq=True, reverse_scale=False):
     raw_annotations = pd.read_csv(annotation_file).drop('Timestamp', 1)
     raw_annotations = raw_annotations.loc[raw_annotations["Group ID"].isin(all_groups)]
-    cleaned_annotation = clean_annotations(raw_annotations, manifestation)
-
+    cleaned_annotation = clean_annotations(raw_annotations, manifestation, reverse_scale)
+    # print("Calc ConvQ - " + str(calculate_convq))
     if calculate_convq:
         scored_annotations = calcualte_convq_score_for(cleaned_annotation, manifestation)
         return scored_annotations
@@ -135,7 +153,7 @@ def derive_convq_scores_for_reponses(annotation_file=constants.group_conq_annot_
 def get_annotator_wise_responses(annotation_file=constants.group_conq_annot_data, manifestation="group", annotators=["Nakul", "Swathi", "Divya"]):
     convq_scores_dict={}
 
-    scored_annotations = derive_convq_scores_for_reponses(annotation_file, manifestation)
+    scored_annotations = derive_convq_scores_for_reponses(annotation_file, manifestation, reverse_scale=True)
     for i, annotator in enumerate(annotators):
         annotator_responses = scored_annotations.loc[scored_annotations['Annotator Name'] == annotator]
         sanity, annotator_responses = sanity_check_responses(annotator_responses, manifestation)
@@ -152,7 +170,7 @@ def get_annotator_wise_responses(annotation_file=constants.group_conq_annot_data
 
 def get_groupwise_annotator_responses(annotation_file=constants.group_conq_annot_data, manifestation="group", annotators=["Nakul", "Swathi", "Divya"]):
     convq_scores_dict={}
-    raw_annotations = derive_convq_scores_for_reponses(annotation_file, manifestation, calculate_convq=False)
+    raw_annotations = derive_convq_scores_for_reponses(annotation_file, manifestation, calculate_convq=False, reverse_scale=False)
     for i, annotator in enumerate(annotators):
         annotator_responses = raw_annotations.loc[raw_annotations['Annotator Name'] == annotator]
         sanity, annotator_responses = sanity_check_responses(annotator_responses, manifestation)
