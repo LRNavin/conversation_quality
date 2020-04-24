@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/annotations/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/annotations/analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/annotations/annotation_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/annotations/annotation_cleaner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic_experiment/scratch_pad_tester.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic_experiment/scratch_pad_tester.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

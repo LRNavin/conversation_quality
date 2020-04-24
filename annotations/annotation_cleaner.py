@@ -113,6 +113,7 @@ def clean_annotations(raw_annotations, manifestation, reverse_scale):
         if column not in column_omit:
             if reverse_scale:
                 if column in reverse_sca: #Reverse Scale
+                    print("~~~~~~~~ Reversing Scale ~~~~~~~~~")
                     cleaned_annotation[column] = cleaned_annotation[column].apply(convert_reverse_annotations_to_int)
                 else:
                     cleaned_annotation[column] = cleaned_annotation[column].apply(convert_normal_annotations_to_int)

@@ -12,16 +12,18 @@ import numpy as np
 import math
 sns.set()
 
-plot_label_dist=False
-plot_kappa_dist=False
 check_label_order=False
 print_scores=False
-plot_final_convq=False
+
+plot_label_dist=False
+plot_kappa_dist=False
+plot_final_convq=True
 plot_pca=False
-group_wise=True
+
+group_wise=False
 sum_wise=True
 
-mean_kappa_vs_conq_plot=True
+mean_kappa_vs_conq_plot=False
 
 if group_wise:
     kappa_label = list(range(1,6))
@@ -45,6 +47,7 @@ def get_correlation_score(annotation1, annotation2):
     correl, p_value = scipy_stat.pearsonr(annotation1, annotation2)
     if math.isnan(correl) or correl == 0.0:
         correl = 0.0
+    if correl < 0.0:
         print(annotation1)
         print(annotation2)
     print("Current Correl: " + str(correl))
