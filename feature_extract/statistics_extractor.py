@@ -50,7 +50,7 @@ ts.rolling(5).max().dropna()[::2]  -> Going with this for now
 # Returns only the Extracted Features and not the Actual Channels
 '''
 def extract_windowed_mean(accel_data, window_size, step_size):
-    print("++ Windowed Mean: Window=" + str(window_size) + ", Step=" + str(step_size) + " ++")
+    # print("++ Windowed Mean: Window=" + str(window_size) + ", Step=" + str(step_size) + " ++")
     temp_accel_data = [] #np.array([]) #np.copy(accel_data)
     for axial in range(accel_data.shape[0]):
         temp_df = pd.DataFrame(data=accel_data[axial,:])
@@ -63,7 +63,7 @@ def extract_windowed_mean(accel_data, window_size, step_size):
     return temp_accel_data
 
 def extract_windowed_variance(accel_data, window_size, step_size):
-    print("++ Windowed Variance: Window=" + str(window_size) + ", Step=" + str(step_size) + " ++")
+    # print("++ Windowed Variance: Window=" + str(window_size) + ", Step=" + str(step_size) + " ++")
     temp_accel_data = [] #np.array([]) #np.copy(accel_data)
     for axial in range(accel_data.shape[0]):
         temp_df = pd.DataFrame(data=accel_data[axial,:])
@@ -82,7 +82,7 @@ def rolling_window(a, window):
     return np.lib.stride_tricks.as_strided(a, shape=shape, strides=strides)
 
 def extract_windowed_psd(accel_data, window_size, step_size):
-    print("++ Windowed PSD: Window=" + str(window_size) + ", Step=" + str(step_size) + " ++")
+    # print("++ Windowed PSD: Window=" + str(window_size) + ", Step=" + str(step_size) + " ++")
     spec_accel_data = []
     for axial in range(accel_data.shape[0]):
         strided_acc = rolling_window(accel_data[axial,:], window_size)[::step_size]
@@ -131,11 +131,11 @@ def get_windowed_base_features_for(group_data, stat_features=["mean", "var"],
                                    spec_features=["psd"], windows=[1, 3, 5, 10, 15], step_size=1):
     group_windowed_data = {}
     for window in windows:
-        print("~~ FOR WINDOW - " + str(window) + " ~~")
+        # print("~~ FOR WINDOW - " + str(window) + " ~~")
         stat_accel_data = get_windowed_statistical_features_for(group_data, stat_features, window, step_size)
         spec_accel_data = get_windowed_spectral_features_for(group_data, spec_features, window, step_size)
         group_windowed_data[str(window)] = np.concatenate((stat_accel_data, spec_accel_data), axis=1)
-        print("AFTER BASE FEATURE EXTRACTION, SHAPE - " + str(group_windowed_data[str(window)].shape))
+        # print("AFTER BASE FEATURE EXTRACTION, SHAPE - " + str(group_windowed_data[str(window)].shape))
 
     return group_windowed_data
 
@@ -147,6 +147,8 @@ def get_base_features_for(group_accel_data, stat_features=["mean", "var"],
     windows = [w * 20 for w in windows] #Convert to samples . 1sec = 20Hz
     for member in group_accel_data.keys():
         print("===Extracting BASE Features: Member "+ str(member) + " ===" )
-        group_accel_data[member] = get_windowed_base_features_for(group_accel_data[member],
-                                                                  stat_features, spec_features, windows, step_size)
+        # print(group_accel_data[member].shape)
+        if len(group_accel_data[member]) != 0:
+            group_accel_data[member] = get_windowed_base_features_for(group_accel_data[member],
+                                                                      stat_features, spec_features, windows, step_size)
     return group_accel_data

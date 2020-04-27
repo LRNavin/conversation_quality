@@ -6,7 +6,7 @@ def clean_sample_checkpoint(samplepoint_column):
     return samplepoint_column.apply(lambda x: int(x))
 
 def clean_timestamp(time_column):
-    #TODO: Some problem with Day3, needs fixes - Problemn with dataset
+    #TODO: Some problem with Day3, needs fixes - Problemn with analysis_data
     return time_column.apply(
         lambda x: ":".join((x.replace("PT", "00:").replace("H", ":").replace("M", ":").replace("S", "")).split(":")[:3]))
             # .replace(":00", "")).replace(".", ":")

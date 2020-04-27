@@ -230,10 +230,10 @@ def perform_pca_analysis_on(annotation_file=constants.group_conq_annot_data, man
     plt.show()
 
 
-manifest="indiv"
-file=constants.indiv_conq_annot_data
+manifest="group"
+file=constants.group_conq_annot_data
 measure="kappa"
-annotators=["Nakul", "Divya"]
+annotators=["Nakul", "Divya", "Swathi"]
 # "Nakul", "Divya", "Swathi"
 
 if plot_pca:

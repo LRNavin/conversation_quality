@@ -19,7 +19,7 @@ def get_mutual_info_between(individual1_acc, individual2_acc, norm=True):
         # print(drv.information_mutual(individual1_acc, individual2_acc))
     '''
 
-    print("Calculating mutual-info.....")
+    # print("Calculating mutual-info.....")
     mi=[]
     for segment in range(individual1_acc.shape[1]):
         indiv1_acc = individual1_acc[:,segment]
@@ -39,10 +39,10 @@ def get_timelagged_correlation_between(individual1_acc, individual2_acc, inverte
     '''
 
     #Below Segmentation is kinda expensive and not efficient. But sticking to it for segment-wise tests/readability
-    if inverted:
-        print("Calculating correlations with LAG- -" + str(lag) + "....")
-    else:
-        print("Calculating correlations with LAG- " + str(lag) + "....")
+    # if inverted:
+    #     print("Calculating correlations with LAG- -" + str(lag) + "....")
+    # else:
+    #     print("Calculating correlations with LAG- " + str(lag) + "....")
 
     lagged_correlation=[]
     for segment in range(individual1_acc.shape[1]):
@@ -113,12 +113,11 @@ def get_synchrony_features_for(group_accel_data, features=["correl", "lag-correl
         for member2 in members:
             # No Same Person and Not same pair if already calculated
             if member1 != member2 and (str(member2)+"_"+str(member1) not in group_pairwise_features.keys()):
-                print("For Members - " + str(member1) + " and " + str(member2))
-                pairwise_features = get_features_for(group_accel_data[member1], group_accel_data[member2], features)
-                print("Pairwise-Feature Shape = " + str(pairwise_features.shape))
+                # print("For Members - " + str(member1) + " and " + str(member2))
+                if len(group_accel_data[member1]) != 0 and len(group_accel_data[member2]) != 0 : #Missing Acc
+                    pairwise_features = get_features_for(group_accel_data[member1], group_accel_data[member2], features)
+                else:
+                    pairwise_features = np.array([])
                 group_pairwise_features[str(member1)+"_"+str(member2)] = pairwise_features
-    # print("# Pairwise Features = " + str(len(group_pairwise_features.keys())))
-    # print("Pairs -> " + str(group_pairwise_features.keys()))
-
     return group_pairwise_features
 

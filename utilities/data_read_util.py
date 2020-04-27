@@ -18,7 +18,7 @@ def open_dataset(filename=const.dataset_name):
     return data
 
 def get_data_from_day(filename=const.dataset_name, day=1):
-    print("Opening dataset - " + filename + " from Day - " + str(day))
+    # print("Opening analysis_data - " + filename + " from Day - " + str(day))
     return open_dataset(filename)[day-1]
 
 def get_accel_data_from_participant(filename=const.dataset_name,
@@ -35,7 +35,7 @@ def get_accel_data_from_participant(filename=const.dataset_name,
     day_data = get_data_from_day(filename, day)
     for member in day_data:
         if str(member.participant) == str(participant_id):
-            print("Found Participant's ("+ str(participant_id) +")"+ " Accelero, ")
+            # print("Found Participant's ("+ str(participant_id) +")"+ " Accelero, ")
             return member.accel
     return None
 
@@ -48,7 +48,7 @@ def get_accel_data_from_participant_between(filename=const.dataset_name, day=1, 
 
     full_member_data  = np.array(get_accel_data_from_participant(filename=filename, day=day,
                                                                  participant_id=participant_id))
-    print("From: " + str(start_time) + ", For: " + str(duration))
+    # print("From: " + str(start_time) + ", For: " + str(duration))
     if len(full_member_data) == 0:
         member_data_timed = full_member_data
     else:
@@ -147,3 +147,13 @@ def count_missing_accelero(group_acc):
         if len(group_acc[member]) == 0:
             count = count + 1
     return count
+
+def save_pickle(data, file_path):
+    with open(file_path, 'wb') as handle:
+        pickle.dump(data, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    return True
+
+def load_pickle(file_path):
+    with open(file_path, 'rb') as handle:
+        data = pickle.load(handle)
+    return data

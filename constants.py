@@ -5,7 +5,8 @@ annotations_path    = "annotations/"
 
 #Temporary Data Storage Path
 temp_storage_path   = "/Users/navinlr/Desktop/Thesis/code_base/conversation_quality/temporary_data_storage/"
-temp_dataset_store  = temp_storage_path + "dataset/"
+main_dataset_storage= temp_storage_path + "dataset/"
+temp_dataset_store  = temp_storage_path + "analysis_data/"
 temp_fform_store    = temp_dataset_store + "groups.pickle"
 temp_grps_day       = temp_dataset_store + "groups_day"
 
@@ -31,3 +32,6 @@ indiv_conq_annot_data = dataset_base_folder + annotations_path + "IndivConvQ-fin
 # Final-Annotations -> F-Form and ConvQ Labels
 # #TODO:ASSUMPTION HERE -> ANNOTATIONS DONE, BUT HAVE TO DO ANNOTATION to FINAL F-FORM + LABELS
 fform_gt_data       = temp_dataset_store + "all_groups_final.csv"
+
+
+features_dataset_path= main_dataset_storage + "features_dataset.pickle"

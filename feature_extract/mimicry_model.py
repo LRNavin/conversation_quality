@@ -36,7 +36,7 @@ def get_mimicry_sq_distance(individual1_acc, individual2_acc, agg_features):
 
 
 def get_asymmetric_mimicry(individual1_acc, individual2_acc, model_type="sq-distance"):
-    print("Calculating Mimicry with Model - " + str(model_type))
+    # print("Calculating Mimicry with Model - " + str(model_type))
     mimicry_features=[]
     if model_type == "sq-distance":
         mimicry_features = get_mimicry_sq_distance(individual1_acc=individual1_acc,
