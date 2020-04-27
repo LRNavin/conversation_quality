@@ -25,8 +25,8 @@ data_name           = "Mingle_30min"
 fform_annot_data    = dataset_base_folder + annotations_path + "groups_GT.ods"
 
 # Conversation Quality Annotations
-group_conq_annot_data = dataset_base_folder + annotations_path + "GroupConvQ-v1.csv"
-indiv_conq_annot_data = dataset_base_folder + annotations_path + "IndivConvQ-v1.csv"
+group_conq_annot_data = dataset_base_folder + annotations_path + "GroupConvQ-final.csv"
+indiv_conq_annot_data = dataset_base_folder + annotations_path + "IndivConvQ-final.csv"
 
 # Final-Annotations -> F-Form and ConvQ Labels
 # #TODO:ASSUMPTION HERE -> ANNOTATIONS DONE, BUT HAVE TO DO ANNOTATION to FINAL F-FORM + LABELS

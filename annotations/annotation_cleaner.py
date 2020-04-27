@@ -42,11 +42,7 @@ iq3="The individual’s interaction seemed to be forced, awkward, and strained."
 iq5="The individual looked uncomfortable during the interaction."
 iq10="The individual looked to be self-conscious during the interaction."
 
-# all_groups = reader.get_all_annotated_groups()["groupid"].values.tolist()
-divya_groups = pd.read_csv(constants.group_conq_annot_data).drop('Timestamp', 1)
-all_groups = divya_groups.loc[divya_groups['Annotator Name'] == "Divya"]['Group ID']
-# IN GROUPS ---
-# all_groups.remove("3_047") # Only if required - Swathi missed this
+all_groups = reader.get_all_annotated_groups()["groupid"].values.tolist()
 no_of_groups = len(all_groups)
 print("Total Groups = " + str(no_of_groups))
 no_of_indivs = 340
@@ -113,7 +109,7 @@ def clean_annotations(raw_annotations, manifestation, reverse_scale):
         if column not in column_omit:
             if reverse_scale:
                 if column in reverse_sca: #Reverse Scale
-                    print("~~~~~~~~ Reversing Scale ~~~~~~~~~")
+                    # print("~~~~~~~~ Reversing Scale ~~~~~~~~~")
                     cleaned_annotation[column] = cleaned_annotation[column].apply(convert_reverse_annotations_to_int)
                 else:
                     cleaned_annotation[column] = cleaned_annotation[column].apply(convert_normal_annotations_to_int)
