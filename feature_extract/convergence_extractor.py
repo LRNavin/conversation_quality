@@ -109,6 +109,7 @@ def get_convergence_features_for(group_accel_data, features=["sym-conv", "asym-c
             if member1 != member2 and (str(member2) + "_" + str(member1) not in group_pairwise_features.keys()):
                 # print("For Members - " + str(member1) + " and " + str(member2))
                 if len(group_accel_data[member1]) != 0 and len(group_accel_data[member2]) != 0 : #Missing Acc
+                    print("===Convergence Members - " + str(member1) + " and " + str(member2) + " ===")
                     pairwise_features = get_features_for(group_accel_data[member1], group_accel_data[member2], features)
                 else:
                     pairwise_features = np.array([])

@@ -2,40 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50d676cd-c199-4a32-8ab8-1860606fb780" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/annotations/annotation_scratch.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/baseline.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modeling/dataset_provider.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/temporary_data_storage/dataset/features_dataset.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/group-annotator0.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/group-annotator1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/group-annotator2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/indiv-annotator0.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/indiv-annotator1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/indiv-annotator2.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/annotations/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/annotations/analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/annotations/annotation_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/annotations/annotation_cleaner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic_experiment/scratch_pad.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic_experiment/scratch_pad.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataset_creation/dataset_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset_creation/dataset_creator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/feature_extract/convergence_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/convergence_extractor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feature_extract/mimicry_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/mimicry_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feature_extract/statistics_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/statistics_extractor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/feature_extract/synchrony_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/synchrony_extractor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/.idea/dataset.iml" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/.idea/dataset.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/all_groups_final.csv" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/all_groups_final.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/final_groups_raw.csv" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/final_groups_raw.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/group_size.json" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/group_size.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/groups.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/groups.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/groups_day1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/groups_day1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/groups_day2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/groups_day2.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/groups_day3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/groups_day3.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/initial_groups_raw.csv" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/initial_groups_raw.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/missing_acc_details.csv" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/missing_acc_details.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/missing_acc_details_processed.csv" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/missing_acc_details_processed.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temporary_data_storage/dataset/temp_group_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/temporary_data_storage/analysis_data/temp_group_data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/data_proc_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/data_proc_util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/data_read_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/data_read_util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/baseline.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment/baseline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modeling/dataset_provider.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/dataset_provider.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +63,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.dataset_creator">
+  <component name="RunManager" selected="Python.baseline">
     <configuration name="analysis" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="conversation_quality" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -125,6 +106,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="baseline" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="conversation_quality" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/main_experiment" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_experiment/baseline.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="dataset_creator" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="conversation_quality" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -138,27 +140,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataset_creation/dataset_creator.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="scratch_pad (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="conversation_quality" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/basic_experiment" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/basic_experiment/scratch_pad.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -190,11 +171,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.dataset_creator" />
+        <item itemvalue="Python.baseline" />
         <item itemvalue="Python.annotation_scratch" />
         <item itemvalue="Python.analysis" />
+        <item itemvalue="Python.dataset_creator" />
         <item itemvalue="Python.scratch_pad_tester" />
-        <item itemvalue="Python.scratch_pad (1)" />
       </list>
     </recent_temporary>
   </component>

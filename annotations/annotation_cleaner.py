@@ -136,6 +136,7 @@ def calcualte_convq_score_for(cleaned_annotation, manifestation="group"):
     return scored_annotations
 
 def derive_convq_scores_for_reponses(annotation_file=constants.group_conq_annot_data, manifestation="group", calculate_convq=True, reverse_scale=False):
+
     raw_annotations = pd.read_csv(annotation_file).drop('Timestamp', 1)
     raw_annotations = raw_annotations.loc[raw_annotations["Group ID"].isin(all_groups)]
     cleaned_annotation = clean_annotations(raw_annotations, manifestation, reverse_scale)
@@ -160,7 +161,7 @@ def get_annotator_wise_responses(annotation_file=constants.group_conq_annot_data
             annotator_responses = annotator_responses.drop('Annotator Name', 1).sort_values(by=['Group ID'])[["Group ID", "group_convq"]]
         elif manifestation == "indiv":
             annotator_responses = annotator_responses.drop('Annotator Name', 1).sort_values(by=['Group ID','Individual ID'])[["Group ID",'Individual ID', "indiv_convq"]]
-        print("Number of responses afer clean for " + annotator + " = " + str(len(annotator_responses)))
+        # print("Number of responses afer clean for " + annotator + " = " + str(len(annotator_responses)))
         annotator_responses.to_csv(manifestation+"-annotator"+str(i)+".csv", index=False)
         convq_scores_dict["annotator"+str(i)]=annotator_responses
     return convq_scores_dict

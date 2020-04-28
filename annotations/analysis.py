@@ -20,10 +20,10 @@ plot_kappa_dist=False
 plot_final_convq=False
 plot_pca=False
 
-group_wise=True
-sum_wise=True
+group_wise=False
+sum_wise=False
 
-mean_kappa_vs_conq_plot=True
+mean_kappa_vs_conq_plot=False
 
 if group_wise:
     kappa_label = list(range(1,6))
@@ -110,10 +110,10 @@ def get_pairwise_agreeability_score(annotation_file, manifestation, annotators):
     return pairwise_score, final_average_score_all, groups_label
 
 
-def get_final_agreeability_score_for(annotation_file=constants.group_conq_annot_data, manifestation="group", annotators=["Nakul", "Swathi", "Divya"]):
+def get_final_convq_score_for(annotation_file=constants.group_conq_annot_data, manifestation="group", annotators=["Nakul", "Swathi", "Divya"]):
     pairwise_score, final_average_score_all, groups_label = get_pairwise_agreeability_score(annotation_file, manifestation, annotators)
     score=0
-    print("Pairwise SCORES - " + str(pairwise_score))
+    # print("Pairwise SCORES - " + str(pairwise_score))
     for pairs in pairwise_score.keys():
         score = score + pairwise_score[pairs]
     score = score/len(pairwise_score.keys())
@@ -129,7 +129,7 @@ def calculate_groupwise_agreeability_score(annotation_file=constants.group_conq_
         else:
             grp_label = annotator_wise_response[annotator]["Group ID"].tolist()
             ind_label = annotator_wise_response[annotator]["Individual ID"].tolist()
-            groups_label = [str(a_) +  "_" + str(b_) for a_, b_ in zip(grp_label, ind_label)]
+            groups_label = [str(a_) +  "-" + str(b_) for a_, b_ in zip(grp_label, ind_label)]
         break
     for annotator1 in annotator_wise_response:
         for annotator2 in annotator_wise_response:
@@ -230,45 +230,47 @@ def perform_pca_analysis_on(annotation_file=constants.group_conq_annot_data, man
     plt.show()
 
 
-manifest="group"
-file=constants.group_conq_annot_data
-measure="kappa"
-annotators=["Nakul", "Divya", "Swathi"]
-# "Nakul", "Divya", "Swathi"
+if False:
+    manifest="group"
+    file=constants.group_conq_annot_data
+    measure="kappa"
+    annotators=["Nakul", "Divya", "Swathi"]
+    # "Nakul", "Divya", "Swathi"
 
-if plot_pca:
-    perform_pca_analysis_on(file, manifest, annotators)
-else:
-    if sum_wise:
-        score, final_average_score_all, groups_label = get_final_agreeability_score_for(annotation_file=file,
-                                                                                        manifestation=manifest,
-                                                                                        annotators=annotators)
-        print("(Calculated Overall) Mean Pair-wise AGREEABILITY - " + str(score))
-        if plot_final_convq:
-            sns.distplot(final_average_score_all, kde=False, rug=True).set_title("MEAN ConvQ - " + manifest)
+    if plot_pca:
+        perform_pca_analysis_on(file, manifest, annotators)
+    else:
+        if sum_wise:
+            score, final_average_score_all, groups_label = get_final_convq_score_for(annotation_file=file,
+                                                                                            manifestation=manifest,
+                                                                                            annotators=annotators)
+            print(groups_label)
+            print("(Calculated Overall) Mean Pair-wise AGREEABILITY - " + str(score))
+            if plot_final_convq:
+                sns.distplot(final_average_score_all, kde=False, rug=True).set_title("MEAN ConvQ - " + manifest)
+                plt.show()
+
+        if group_wise:
+            score, pairwise_groupwise_score, groups_label = get_final_groupwise_agreeability_score_for(annotation_file=file,
+                                                                                              manifestation=manifest,
+                                                                                              annotators=annotators)
+            print(pairwise_groupwise_score)
+            pairwise_groupwise_score_meaned = pd.DataFrame.from_dict(pairwise_groupwise_score).mean(axis = 1)
+            print("(Calculated Group-Wise) Mean Pair-wise AGREEABILITY - " + str(score))
+            if plot_final_convq:
+                sns.distplot(pairwise_groupwise_score_meaned, bins=10, kde=False, rug=True).set_title("Mean AGREEABILITY SCORE - " + manifest)
+                plt.show()
+
+        if mean_kappa_vs_conq_plot:
+            filtered_ind = np.where(np.array(pairwise_groupwise_score_meaned) >= -10)
+            pairwise_groupwise_score_meaned = np.array(pairwise_groupwise_score_meaned)[filtered_ind[0]].tolist()
+            final_average_score_all = np.array(final_average_score_all)[filtered_ind[0]].tolist()
+            plt.scatter(pairwise_groupwise_score_meaned, final_average_score_all,s=8,c='b')
+            if False:
+                for i, txt in enumerate(groups_label):
+                    plt.annotate(txt, (pairwise_groupwise_score_meaned[i],
+                                       final_average_score_all[i]))
+
+            plt.ylabel('Mean ConvQ Score - ' + manifest)
+            plt.xlabel('Mean Kappa Score')
             plt.show()
-
-    if group_wise:
-        score, pairwise_groupwise_score, groups_label = get_final_groupwise_agreeability_score_for(annotation_file=file,
-                                                                                          manifestation=manifest,
-                                                                                          annotators=annotators)
-        print(pairwise_groupwise_score)
-        pairwise_groupwise_score_meaned = pd.DataFrame.from_dict(pairwise_groupwise_score).mean(axis = 1)
-        print("(Calculated Group-Wise) Mean Pair-wise AGREEABILITY - " + str(score))
-        if plot_final_convq:
-            sns.distplot(pairwise_groupwise_score_meaned, bins=10, kde=False, rug=True).set_title("Mean AGREEABILITY SCORE - " + manifest)
-            plt.show()
-
-    if mean_kappa_vs_conq_plot:
-        filtered_ind = np.where(np.array(pairwise_groupwise_score_meaned) >= -10)
-        pairwise_groupwise_score_meaned = np.array(pairwise_groupwise_score_meaned)[filtered_ind[0]].tolist()
-        final_average_score_all = np.array(final_average_score_all)[filtered_ind[0]].tolist()
-        plt.scatter(pairwise_groupwise_score_meaned, final_average_score_all,s=8,c='b')
-        if False:
-            for i, txt in enumerate(groups_label):
-                plt.annotate(txt, (pairwise_groupwise_score_meaned[i],
-                                   final_average_score_all[i]))
-
-        plt.ylabel('Mean ConvQ Score - ' + manifest)
-        plt.xlabel('Mean Kappa Score')
-        plt.show()

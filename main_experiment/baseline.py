@@ -24,8 +24,19 @@ import pandas as pd
 random_seed=44
 manifest="group"
 data_split_per=.30
+missing_data_thresh=.5
+agreeability_thresh=.0
+annotators=["Divya", "Nakul", "Swathi"]
+only_involved_pairs=True
 
-X, y = data_gen.get_dataset_for_experiment(manifest=manifest)
+X, y, ids = data_gen.get_dataset_for_experiment(manifest=manifest,
+                                                missing_data_thresh=0.5, agreeability_thresh=0.2,
+                                                annotators=annotators, only_involved_pairs=only_involved_pairs)
+print(X.shape)
+# print(X)
+print(len(y))
+# print(y)
+
 train_X, test_X, train_y, test_y = train_test_split(X, y, test_size=data_split_per, random_state=random_seed)
 
 def feature_selection(method="pca"):

@@ -81,7 +81,7 @@ def get_correlation_between(individual1_acc, individual2_acc):
 def get_features_for(individual1_data, individual2_data, features):
     synchrony_features = []
     for feature in features:
-        print("---- Extracting Synchrony Features ----> " + feature)
+        # print("---- Extracting Synchrony Features ----> " + feature)
         synchrony_windowed_feature = []
         for window in individual1_data.keys():
             curr_window_data1 = individual1_data[window]
@@ -113,8 +113,8 @@ def get_synchrony_features_for(group_accel_data, features=["correl", "lag-correl
         for member2 in members:
             # No Same Person and Not same pair if already calculated
             if member1 != member2 and (str(member2)+"_"+str(member1) not in group_pairwise_features.keys()):
-                # print("For Members - " + str(member1) + " and " + str(member2))
                 if len(group_accel_data[member1]) != 0 and len(group_accel_data[member2]) != 0 : #Missing Acc
+                    print("===Synchrony Members - " + str(member1) + " and " + str(member2) + " ===")
                     pairwise_features = get_features_for(group_accel_data[member1], group_accel_data[member2], features)
                 else:
                     pairwise_features = np.array([])
