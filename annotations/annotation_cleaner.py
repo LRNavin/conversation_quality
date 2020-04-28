@@ -178,7 +178,7 @@ def get_groupwise_annotator_responses(annotation_file=constants.group_conq_annot
             annotator_responses = annotator_responses.drop('Annotator Name', 1).sort_values(by=['Group ID'])
         elif manifestation == "indiv":
             annotator_responses = annotator_responses.drop('Annotator Name', 1).sort_values(by=['Group ID', 'Individual ID'])
-        print("Number of responses afer clean for " + annotator + " = " + str(len(annotator_responses)))
+        # print("Number of responses afer clean for " + annotator + " = " + str(len(annotator_responses)))
         convq_scores_dict["annotator"+str(i)]=annotator_responses
     return convq_scores_dict
 

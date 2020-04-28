@@ -30,6 +30,9 @@ if group_wise:
 else:
     kappa_label = list(range(1,51))
 
+# IMPORTANT VARIABLES
+measure="kappa"
+
 def get_kappa_score(annotation1, annotation2):
     # Cohen's Method
     # print(kappa_label)
@@ -111,13 +114,19 @@ def get_pairwise_agreeability_score(annotation_file, manifestation, annotators):
 
 
 def get_final_convq_score_for(annotation_file=constants.group_conq_annot_data, manifestation="group", annotators=["Nakul", "Swathi", "Divya"]):
-    pairwise_score, final_average_score_all, groups_label = get_pairwise_agreeability_score(annotation_file, manifestation, annotators)
+    # Get Conversation Quality Scores
+    pairwise_convq_score, final_average_convq, groups_label_1 = get_pairwise_agreeability_score(annotation_file, manifestation, annotators)
+    # Get Inter-Rater Agreeability for ConvQ scores
+    pairwise_kappa_score, final_average_kappa, groups_label_2 = get_final_groupwise_agreeability_score_for(annotation_file, manifestation, annotators)
+
+    #Conversion from pairwise kappa to final
+    final_average_kappa = pd.DataFrame.from_dict(final_average_kappa).mean(axis=1).values.tolist()
+
     score=0
-    # print("Pairwise SCORES - " + str(pairwise_score))
-    for pairs in pairwise_score.keys():
-        score = score + pairwise_score[pairs]
-    score = score/len(pairwise_score.keys())
-    return score, final_average_score_all, groups_label
+    for pairs in pairwise_convq_score.keys():
+        score = score + pairwise_convq_score[pairs]
+    score = score/len(pairwise_convq_score.keys())
+    return score, final_average_convq.values.tolist(), final_average_kappa, groups_label_1 # groups_label_1 and groups_label_2 are same -> Coming from different datasources (Values Checked)
 
 def calculate_groupwise_agreeability_score(annotation_file=constants.group_conq_annot_data, manifestation="group", annotators=["Nakul", "Swathi", "Divya"]):
     pairwise_score={}
@@ -131,6 +140,7 @@ def calculate_groupwise_agreeability_score(annotation_file=constants.group_conq_
             ind_label = annotator_wise_response[annotator]["Individual ID"].tolist()
             groups_label = [str(a_) +  "-" + str(b_) for a_, b_ in zip(grp_label, ind_label)]
         break
+
     for annotator1 in annotator_wise_response:
         for annotator2 in annotator_wise_response:
             if (annotator1 != annotator2) and (annotator2 + "_" + annotator1 not in pairwise_score.keys()):
@@ -170,12 +180,13 @@ def calculate_groupwise_agreeability_score(annotation_file=constants.group_conq_
                 # groups_score = pd.DataFrame(groups_score).dropna()[0].values
                 pairwise_score[annotator1+"_"+annotator2] = mean(groups_score)
                 pairwise_groupwise_score[annotator1+"_"+annotator2] = groups_score
+
     return pairwise_score, pairwise_groupwise_score, groups_label
 
 def get_final_groupwise_agreeability_score_for(annotation_file=constants.group_conq_annot_data, manifestation="group", annotators=["Nakul", "Swathi", "Divya"]):
     pairwise_score, pairwise_groupwise_score, groups_label = calculate_groupwise_agreeability_score(annotation_file=annotation_file, manifestation=manifestation, annotators=annotators)
     score=0
-    print("Pairwise SCORES - " + str(pairwise_score))
+    # print("Pairwise SCORES - " + str(pairwise_score))
     for pairs in pairwise_score.keys():
         score = score + pairwise_score[pairs]
     score = score/len(pairwise_score.keys())

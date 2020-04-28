@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50d676cd-c199-4a32-8ab8-1860606fb780" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/main_experiment/group-annotator0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/group-annotator1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/group-annotator2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/indiv-annotator0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/indiv-annotator1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/indiv-annotator2.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/annotations/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/annotations/analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/annotations/annotation_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/annotations/annotation_cleaner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic_experiment/scratch_pad.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic_experiment/scratch_pad.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataset_creation/dataset_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset_creation/dataset_creator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feature_extract/convergence_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/convergence_extractor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feature_extract/synchrony_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/synchrony_extractor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_experiment/baseline.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment/baseline.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modeling/dataset_provider.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/dataset_provider.py" afterDir="false" />
     </list>

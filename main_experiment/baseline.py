@@ -22,15 +22,15 @@ import pandas as pd
 
 # Variables for baseline
 random_seed=44
-manifest="group"
+manifest="indiv"
 data_split_per=.30
-missing_data_thresh=.5
-agreeability_thresh=.0
-annotators=["Divya", "Nakul", "Swathi"]
+missing_data_thresh=50.0 #(in percent)
+agreeability_thresh=.2
+annotators=["Divya", "Nakul"]#, "Swathi"]
 only_involved_pairs=True
 
 X, y, ids = data_gen.get_dataset_for_experiment(manifest=manifest,
-                                                missing_data_thresh=0.5, agreeability_thresh=0.2,
+                                                missing_data_thresh=missing_data_thresh, agreeability_thresh=agreeability_thresh,
                                                 annotators=annotators, only_involved_pairs=only_involved_pairs)
 print(X.shape)
 # print(X)
