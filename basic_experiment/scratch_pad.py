@@ -65,7 +65,7 @@ import shutil
 from scipy import signal
 import json
 
-if False:
+if True:
     all_groupids = reader.get_all_annotated_groups()["groupid"].values
     errored_groups = []
 

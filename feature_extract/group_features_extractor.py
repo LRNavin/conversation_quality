@@ -12,7 +12,7 @@ def aggregate_to_group_features(pairwise_features, agg_features=[np.min, np.max,
             concatenated_features = pair_feature
         else:
             concatenated_features = np.concatenate((concatenated_features, pair_feature), axis=0)
-
+    # print(concatenated_features)
     #Compute aggregate features
     for feature in agg_features:
         if feature == stats.mode:

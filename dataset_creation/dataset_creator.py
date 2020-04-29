@@ -37,13 +37,13 @@ def generate_indiv_dataset_from_all_groups(channels,
     return groupwise_indiv_acc
 
 
-def extract_and_save_dataset(channels, stat_features, spec_features, windows, step_size, sync_feats, conver_feats):
+def extract_and_save_dataset(dest_file, channels, stat_features, spec_features, windows, step_size, sync_feats, conver_feats):
     features_data = generate_indiv_dataset_from_all_groups(channels = channels,
                                                          stat_features=stat_features, spec_features=spec_features,
                                                          windows=windows, step_size=step_size,
                                                          sync_feats=sync_feats, conver_feats=conver_feats)
 
-    data_util.save_pickle(features_data, const.features_dataset_path)
+    data_util.save_pickle(features_data, dest_file)
     print("~~~~~~~~~~~~~~~~~~~~ data saved ~~~~~~~~~~~~~~~~~~~~~")
     return True, features_data
 
@@ -77,13 +77,20 @@ def is_individual_accelro_present_in(missing_filtered_data, group_id, indv_id):
 
 def get_pairs_involved_by_indiv(missing_filtered_data, grp_id, ind_id, indiv_pairs_data):
     group_pairs_list = list(missing_filtered_data[grp_id].keys())
+    # print("Group ID - " + str(grp_id))
+    # print("All - Pairs - " + str(group_pairs_list))
+    # print("INdiv ID - " + str(ind_id))
+
     # Get Only inlvolved pairs
     for pair in missing_filtered_data[grp_id].keys():
         if ind_id not in pair:  # Take only pairwise features related to INDIV - ind_id for inidivudal ConvQ modelling
             group_pairs_list.remove(pair)
+
     # Store Only inlvolved pairs
-    for required_pairs in group_pairs_list:
-        indiv_pairs_data[required_pairs] = missing_filtered_data[grp_id][required_pairs]
+    for i, required_pair in enumerate(group_pairs_list):
+        if ind_id == required_pair.split("_")[0]:
+            # print("Involved - Pairs - " + str(i) + ", " + str(required_pair))
+            indiv_pairs_data[required_pair] = missing_filtered_data[grp_id][required_pair]
     return indiv_pairs_data
 
 
@@ -99,11 +106,14 @@ def filter_dataset(features_data_path, missing_data_thresh, agreeability_thresh,
     # While preparing Group_level and Indiv modelling dataset
     for group_id in features_data.keys():
         if group_id in filtered_group_ids: # If not many missing accelero as per threshold set above
+            # print("For Group - " + str(group_id))
             group_data = features_data[group_id]
+            # print("All True pairs - " + str(group_data.keys()))
             filtered_group_data = {}
             for pairs in group_data.keys():
                 if len(group_data[pairs]) != 0: # If current pair data not empty
                     filtered_group_data[pairs]=group_data[pairs]
+            # print("All avaialble pairs - " + str(filtered_group_data.keys()))
             missing_filtered_data[group_id] = filtered_group_data
     print("Number of Groups (After removing missing data) - " + str(len(missing_filtered_data.keys())))
 
@@ -133,6 +143,7 @@ def filter_dataset(features_data_path, missing_data_thresh, agreeability_thresh,
                 agreeability_filtered_data[grp_id + "_" +ind_id] = indiv_pairs_data
                 final_item_ids.append(reliable_ids[i])
                 final_convq_scores.append(reliable_convqs[i])
+
     print("Number of Final Data-points (After removing unreliable annotation data) - " + str(len(agreeability_filtered_data.keys())))
 
     return agreeability_filtered_data, final_item_ids, final_convq_scores

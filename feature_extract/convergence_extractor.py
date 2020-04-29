@@ -78,7 +78,7 @@ def get_global_convergence_between(individual1, individual2):
 def get_features_for(individual1_data, individual2_data, features):
     convergence_features = []
     for feature in features:
-        print("---- Extracting Synchrony Features ----> " + feature)
+        # print("---- Extracting Convergence Features ----> " + feature)
         synchrony_windowed_feature = []
         for window in individual1_data.keys():
             curr_window_data1 = individual1_data[window]
@@ -105,8 +105,8 @@ def get_convergence_features_for(group_accel_data, features=["sym-conv", "asym-c
     members = group_accel_data.keys()
     for member1 in members:
         for member2 in members:
-            # No Same Person and Not same pair if already calculated
-            if member1 != member2 and (str(member2) + "_" + str(member1) not in group_pairwise_features.keys()):
+            # No Same Person and Not same pair if already calculated # TODO: Remove this same pair check, Useful for assymetric features
+            if member1 != member2: # and (str(member2) + "_" + str(member1) not in group_pairwise_features.keys()):
                 # print("For Members - " + str(member1) + " and " + str(member2))
                 if len(group_accel_data[member1]) != 0 and len(group_accel_data[member2]) != 0 : #Missing Acc
                     print("===Convergence Members - " + str(member1) + " and " + str(member2) + " ===")

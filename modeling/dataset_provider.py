@@ -6,11 +6,11 @@ import numpy as np
 from tqdm import tqdm
 
 # Group-Level Dataset Generation
-def generate_aggregated_group_features_dataset(missing_data_thresh, agreeability_thresh, annotators):
+def generate_aggregated_group_features_dataset(dataset, missing_data_thresh, agreeability_thresh, annotators):
 
-    filtered_dataset, convq_ids, convq_scores = data_generator.filter_dataset(const.features_dataset_path,
-                                                                                          missing_data_thresh, agreeability_thresh,
-                                                                                          "group", annotators, True)
+    filtered_dataset, convq_ids, convq_scores = data_generator.filter_dataset(dataset,
+                                                                              missing_data_thresh, agreeability_thresh,
+                                                                              "group", annotators, True)
     print("Dataset for modeling ConvQ Generated !!!!!!")
 
     X, Y = [], []
@@ -25,9 +25,9 @@ def generate_aggregated_group_features_dataset(missing_data_thresh, agreeability
     return X, np.array(Y), convq_ids
 
 # Indiv-Level Dataset Generation
-def generate_aggregated_indiv_features_dataset(missing_data_thresh, agreeability_thresh, annotators, only_involved_pairs):
+def generate_aggregated_indiv_features_dataset(dataset, missing_data_thresh, agreeability_thresh, annotators, only_involved_pairs):
 
-    filtered_dataset, convq_ids, convq_scores = data_generator.filter_dataset(const.features_dataset_path,
+    filtered_dataset, convq_ids, convq_scores = data_generator.filter_dataset(dataset,
                                                                               missing_data_thresh, agreeability_thresh,
                                                                               "indiv", annotators, only_involved_pairs)
     X, Y = [], []
@@ -44,9 +44,9 @@ def generate_aggregated_indiv_features_dataset(missing_data_thresh, agreeability
 # Public Function - Receive external requests
 
 # 1. Statistical Aggreagtion Based Dataset generation
-def get_dataset_for_experiment(manifest, missing_data_thresh, agreeability_thresh, annotators, only_involved_pairs):
+def get_dataset_for_experiment(dataset, manifest, missing_data_thresh, agreeability_thresh, annotators, only_involved_pairs):
     print("Generating Dataset for modeling - " + manifest + " ConvQ, ...........")
     if manifest == "group":
-        return generate_aggregated_group_features_dataset(missing_data_thresh, agreeability_thresh, annotators)
+        return generate_aggregated_group_features_dataset(dataset, missing_data_thresh, agreeability_thresh, annotators)
     else:
-        return generate_aggregated_indiv_features_dataset(missing_data_thresh, agreeability_thresh, annotators, only_involved_pairs)
+        return generate_aggregated_indiv_features_dataset(dataset, missing_data_thresh, agreeability_thresh, annotators, only_involved_pairs)

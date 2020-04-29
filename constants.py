@@ -34,4 +34,6 @@ indiv_conq_annot_data = dataset_base_folder + annotations_path + "IndivConvQ-fin
 fform_gt_data       = temp_dataset_store + "all_groups_final.csv"
 
 
-features_dataset_path= main_dataset_storage + "features_dataset.pickle"
+#Features Dataset paths
+features_dataset_path    = main_dataset_storage + "features_dataset.pickle"
+features_dataset_path_v1 = main_dataset_storage + "features_dataset_v1.pickle"
