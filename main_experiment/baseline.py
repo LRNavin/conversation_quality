@@ -29,6 +29,7 @@ missing_data_thresh=50.0 #(in percent)
 agreeability_thresh=.2
 annotators=["Divya", "Nakul"]#, "Swathi"]
 only_involved_pairs=True
+zero_mean=True
 
 def feature_selection(method="pca"):
     return None
@@ -62,7 +63,7 @@ def baseline_experiment_trigger(dataset):
                                                     manifest=manifest,
                                                     missing_data_thresh=missing_data_thresh,
                                                     agreeability_thresh=agreeability_thresh,
-                                                    annotators=annotators, only_involved_pairs=only_involved_pairs)
+                                                    annotators=annotators, only_involved_pairs=only_involved_pairs, zero_mean=zero_mean)
     print(X.shape)
     # print(X)
     print(len(y))

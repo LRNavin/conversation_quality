@@ -1,5 +1,6 @@
 import utilities.data_read_util as reader
 from sklearn import preprocessing
+from sklearn.preprocessing import scale
 
 import constants
 import pandas as pd
@@ -128,30 +129,46 @@ def calcualte_convq_score_for(cleaned_annotation, manifestation="group"):
     col_list.remove("Annotator Name")
     if manifestation == "group":
         scored_annotations["group_convq"] = scored_annotations[col_list].mean(axis=1)
-        scored_annotations["group_convq"] = normalize_annotator_bias_for(scored_annotations["group_convq"].values)
+        # scored_annotations["group_convq"] = normalize_annotator_bias_for(scored_annotations["group_convq"].values)
     else:
         col_list.remove('Individual ID')
         scored_annotations["indiv_convq"] = scored_annotations[col_list].mean(axis=1)
-        scored_annotations["indiv_convq"] = normalize_annotator_bias_for(scored_annotations["indiv_convq"].values)
+        # scored_annotations["indiv_convq"] = normalize_annotator_bias_for(scored_annotations["indiv_convq"].values)
+
     return scored_annotations
 
-def derive_convq_scores_for_reponses(annotation_file=constants.group_conq_annot_data, manifestation="group", calculate_convq=True, reverse_scale=False):
+def derive_convq_scores_for_reponses(annotators, annotation_file=constants.group_conq_annot_data, manifestation="group", calculate_convq=True, reverse_scale=False, zero_mean=False):
 
     raw_annotations = pd.read_csv(annotation_file).drop('Timestamp', 1)
     raw_annotations = raw_annotations.loc[raw_annotations["Group ID"].isin(all_groups)]
     cleaned_annotation = clean_annotations(raw_annotations, manifestation, reverse_scale)
-    # print("Calc ConvQ - " + str(calculate_convq))
+    print("ZERO-MEAN Technique ? - " + str(zero_mean))
+    if zero_mean:
+        skip_column=['Annotator Name', 'Group ID', 'Individual ID']
+        for i, annotator in enumerate(annotators):
+            for column in cleaned_annotation.columns:
+                if column not in skip_column:
+                    annotator_ques_responses = cleaned_annotation.loc[cleaned_annotation['Annotator Name'] == annotator][column]
+                    # print(annotator_ques_responses.values)
+                    # print(np.mean(annotator_ques_responses.values))
+                    # print(annotator_ques_responses.values)
+                    # print(np.mean(annotator_ques_responses))
+                    # print("Mean = " + str(int(np.mean(annotator_ques_responses))))
+                    response_scaled = annotator_ques_responses - int(np.mean(annotator_ques_responses)) #scale(annotator_ques_responses, with_mean=True, with_std=False)
+                    # print(response_scaled.values)
+                    cleaned_annotation.loc[cleaned_annotation['Annotator Name'] == annotator, column]=response_scaled
+                    # print(cleaned_annotation.loc[cleaned_annotation['Annotator Name'] == annotator][column].values)
     if calculate_convq:
         scored_annotations = calcualte_convq_score_for(cleaned_annotation, manifestation)
         return scored_annotations
-    else:
-        return cleaned_annotation
+    return cleaned_annotation
 
 
-def get_annotator_wise_responses(annotation_file=constants.group_conq_annot_data, manifestation="group", annotators=["Nakul", "Swathi", "Divya"]):
+def get_annotator_wise_responses(annotation_file=constants.group_conq_annot_data, manifestation="group", annotators=["Nakul", "Swathi", "Divya"], zero_mean=False):
     convq_scores_dict={}
-
-    scored_annotations = derive_convq_scores_for_reponses(annotation_file, manifestation, reverse_scale=True)
+    # TODO: Do ZERO-MEAN here - Under "derive_convq_scores_for_reponses" - Common function for both kappa calc and convq calc
+    # TODO: OR CAN also do below under annotator-wise for loop (But need two fucntion edits)
+    scored_annotations = derive_convq_scores_for_reponses(annotators, annotation_file, manifestation, reverse_scale=True, zero_mean=zero_mean)
     for i, annotator in enumerate(annotators):
         annotator_responses = scored_annotations.loc[scored_annotations['Annotator Name'] == annotator]
         sanity, annotator_responses = sanity_check_responses(annotator_responses, manifestation)
@@ -162,13 +179,15 @@ def get_annotator_wise_responses(annotation_file=constants.group_conq_annot_data
         elif manifestation == "indiv":
             annotator_responses = annotator_responses.drop('Annotator Name', 1).sort_values(by=['Group ID','Individual ID'])[["Group ID",'Individual ID', "indiv_convq"]]
         # print("Number of responses afer clean for " + annotator + " = " + str(len(annotator_responses)))
-        annotator_responses.to_csv(manifestation+"-annotator"+str(i)+".csv", index=False)
+        # annotator_responses.to_csv(manifestation+"-annotator"+str(i)+".csv", index=False)
         convq_scores_dict["annotator"+str(i)]=annotator_responses
     return convq_scores_dict
 
-def get_groupwise_annotator_responses(annotation_file=constants.group_conq_annot_data, manifestation="group", annotators=["Nakul", "Swathi", "Divya"]):
+# ANNOTATOR EXTRACTOR and CLEANER
+def get_groupwise_annotator_responses(annotation_file=constants.group_conq_annot_data, manifestation="group", annotators=["Nakul", "Swathi", "Divya"], zero_mean=False):
     convq_scores_dict={}
-    raw_annotations = derive_convq_scores_for_reponses(annotation_file, manifestation, calculate_convq=False, reverse_scale=False)
+    # TODO: Do ZERO-MEAN here - Under "derive_convq_scores_for_reponses" - Common function for both kappa calc and convq calc
+    raw_annotations = derive_convq_scores_for_reponses(annotators, annotation_file, manifestation, calculate_convq=False, reverse_scale=False, zero_mean=zero_mean)
     for i, annotator in enumerate(annotators):
         annotator_responses = raw_annotations.loc[raw_annotations['Annotator Name'] == annotator]
         sanity, annotator_responses = sanity_check_responses(annotator_responses, manifestation)

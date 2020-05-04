@@ -2,19 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50d676cd-c199-4a32-8ab8-1860606fb780" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/basic_experiment/features_tester.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dataset_creation/feature_extraction_script.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/experiment_util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/annotations/itemwise_alpha.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/.ipynb_checkpoints/Untitled-checkpoint.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/.ipynb_checkpoints/baseline-checkpoint.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/.ipynb_checkpoints/predict_v1-checkpoint.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/Untitled.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/baseline.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/predict_v1.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic_experiment/scratch_pad.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic_experiment/scratch_pad.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic_experiment/scratch_pad_tester.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic_experiment/scratch_pad_tester.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/annotations/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/annotations/analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/annotations/annotation_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/annotations/annotation_cleaner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic_experiment/script_dumps.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic_experiment/script_dumps.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataset_creation/dataset_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset_creation/dataset_creator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feature_extract/convergence_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/convergence_extractor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feature_extract/group_features_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/group_features_extractor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/feature_extract/synchrony_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/synchrony_extractor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_experiment/baseline.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment/baseline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/group-annotator0.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/group-annotator1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/group-annotator2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/indiv-annotator0.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/indiv-annotator1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/indiv-annotator2.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/modeling/dataset_provider.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/dataset_provider.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/data_read_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/data_read_util.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +70,49 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.baseline">
+  <component name="RunManager" selected="Python.analysis">
+    <configuration name="analysis" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="conversation_quality" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/annotations" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/annotations/analysis.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="annotation_cleaner" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="conversation_quality" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/annotations" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/annotations/annotation_cleaner.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="annotation_scratch" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="conversation_quality" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -83,7 +134,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="baseline" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="itemwise_alpha" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="conversation_quality" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -91,11 +142,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/main_experiment" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/annotations" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_experiment/baseline.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/annotations/itemwise_alpha.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -104,49 +155,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="dataset_creator" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="conversation_quality" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dataset_creation" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataset_creation/dataset_creator.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="feature_extraction_script" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="conversation_quality" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dataset_creation" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataset_creation/feature_extraction_script.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="scratch_pad_tester" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="script_dumps" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="conversation_quality" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -158,7 +167,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/basic_experiment/scratch_pad_tester.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/basic_experiment/script_dumps.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -169,10 +178,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.baseline" />
-        <item itemvalue="Python.feature_extraction_script" />
-        <item itemvalue="Python.dataset_creator" />
-        <item itemvalue="Python.scratch_pad_tester" />
+        <item itemvalue="Python.analysis" />
+        <item itemvalue="Python.itemwise_alpha" />
+        <item itemvalue="Python.script_dumps" />
+        <item itemvalue="Python.annotation_cleaner" />
         <item itemvalue="Python.annotation_scratch" />
       </list>
     </recent_temporary>

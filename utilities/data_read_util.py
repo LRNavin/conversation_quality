@@ -1,11 +1,11 @@
 #!python
 #!/usr/bin/env python
-from pandas_ods_reader import read_ods
+# from pandas_ods_reader import read_ods
 from scipy.io import loadmat
 import constants as const
 import numpy as np
 import pandas as pd
-import ezodf
+# import ezodf
 import datetime
 import pickle
 
@@ -123,16 +123,16 @@ def get_annotated_fformations(annotation_file=const.fform_annot_data, from_final
         if from_store:
             with open(const.temp_fform_store, 'rb') as data_store:
                 groups = pickle.load(data_store)
-        else:
-            # load a file
-            doc = ezodf.opendoc(annotation_file)
-            print("Spreadsheet contains %d sheet(s)." % len(doc.sheets))
-            for i, sheet in enumerate(doc.sheets):
-                print("Sheet - " + str(sheet.name))
-                groups[sheet.name] = data_processor.add_column_fform_data(
-                                        data_processor.clean_fformation_data(
-                                            process_annotation_sheet(sheet)))
-                groups[sheet.name].to_csv(const.temp_grps_day+str(i+1)+".csv")
+        # else:
+        #     # load a file
+        #     doc = ezodf.opendoc(annotation_file)
+        #     print("Spreadsheet contains %d sheet(s)." % len(doc.sheets))
+        #     for i, sheet in enumerate(doc.sheets):
+        #         print("Sheet - " + str(sheet.name))
+        #         groups[sheet.name] = data_processor.add_column_fform_data(
+        #                                 data_processor.clean_fformation_data(
+        #                                     process_annotation_sheet(sheet)))
+        #         groups[sheet.name].to_csv(const.temp_grps_day+str(i+1)+".csv")
     return groups
 
 def clean_and_store_fform_annotations(annotation_file):

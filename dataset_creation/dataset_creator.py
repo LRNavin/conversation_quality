@@ -4,7 +4,6 @@ import feature_extract.statistics_extractor as base_feat_extractor
 import feature_extract.synchrony_extractor as sync_extractor
 import feature_extract.convergence_extractor as conv_extractor
 import feature_extract.features_postproc as post_processor
-import feature_extract.group_features_extractor as group_feat_extractor
 import annotations.analysis as annotation_reader
 import utilities.data_read_util as data_util
 import constants as const
@@ -49,14 +48,15 @@ def extract_and_save_dataset(dest_file, channels, stat_features, spec_features, 
 
 #BASED ON MISS INDIV ACC and LOW ANNOTATOR RELIABILITY
 # Groups and Indiividuals - Data selection based on agreeability scores:
-def get_annotation_realiable_labels(agreeability_thresh, manifest, annotators):
+def get_annotation_realiable_labels(agreeability_thresh, manifest, annotators, zero_mean):
     if manifest == "group":
         file = const.group_conq_annot_data
     else:
         file = const.indiv_conq_annot_data
-    score, final_average_convq, final_average_kappa, groups_label = annotation_reader.get_final_convq_score_for(annotation_file=file,
+
+    score_convq, score_kappa, final_average_convq, final_average_kappa, groups_label = annotation_reader.get_final_convq_score_for(annotation_file=file,
                                                                                                     manifestation=manifest,
-                                                                                                    annotators=annotators)
+                                                                                                    annotators=annotators, zero_mean=zero_mean)
     # print(groups_label)
     # print(final_average_convq)
     # print(final_average_kappa)
@@ -96,7 +96,7 @@ def get_pairs_involved_by_indiv(missing_filtered_data, grp_id, ind_id, indiv_pai
 
 # THE ONLY DIRTY CODE - WROTE IN A BAD MOOD :(
 # TODO: Check Dataset order w.r.t ids once
-def filter_dataset(features_data_path, missing_data_thresh, agreeability_thresh, manifest, annotators, only_involved_pairs):
+def filter_dataset(features_data_path, missing_data_thresh, agreeability_thresh, manifest, annotators, only_involved_pairs, zero_mean):
     features_data = reader.load_pickle(features_data_path)
     missing_filtered_data = {}
 
@@ -119,7 +119,7 @@ def filter_dataset(features_data_path, missing_data_thresh, agreeability_thresh,
 
     agreeability_filtered_data = {}
     # Remove LOW ANNOTATOR RELIABILITY
-    reliable_ids, reliable_convqs, reliable_kappas = get_annotation_realiable_labels(agreeability_thresh, manifest, annotators)
+    reliable_ids, reliable_convqs, reliable_kappas = get_annotation_realiable_labels(agreeability_thresh, manifest, annotators, zero_mean)
     final_item_ids = []
     final_convq_scores = []
     # print("Total Reliable Data-points - " + str(len(reliable_ids)))
