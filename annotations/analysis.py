@@ -32,24 +32,26 @@ if group_wise:
 else:
     kappa_label = list(range(1,51))
 
-# IMPORTANT FOR MODELLING
-measure="kappa"
-
 def get_kappa_score(annotation1, annotation2):
     # Cohen's Method
     # print(kappa_label)
     # annotation1=np.around(annotation1, decimals=1)
     # annotation2=np.around(annotation2, decimals=1)
-    # kappa_label = np.unique(np.array(annotation1 + annotation2))
-    print(annotation1)
-    print(annotation2)
+    # kappa_label = np.unique(np.array(list(annotation1) + list(annotation2)))
+    # kappa_label.extend(annotation2)
+    # kappa_label=np.unique(kappa_label)#.sort()
+    # kappa_label.sort()
+    # kappa_label = np.arange(-3,4)
+    # print(annotation1)
+    # print(annotation2)
+    # print(kappa_label)
     kappa = metrics.cohen_kappa_score(y1=annotation1, y2=annotation2, weights="quadratic")
     if math.isnan(kappa) or kappa == 0.0:
         kappa = 0.0
     # if kappa < 0.0:
     #     print(annotation1)
     #     print(annotation2)
-    print("Current Kappa: " + str(kappa))
+    # print("Current Kappa: " + str(kappa))
     return kappa
 
 # Taken From - https://github.com/statsmodels/statsmodels/issues/1272
@@ -337,12 +339,14 @@ def perform_pca_analysis_on(annotation_file=constants.group_conq_annot_data, man
     plot_eigenvalue_bar_graph(pca.explained_variance_)
     plt.show()
 
+# IMPORTANT FOR MODELLING
+measure="kappa"
 
-if False :
+if False:
     manifest="indiv"
     file=constants.indiv_conq_annot_data
     annotators=["Nakul", "Divya"]#, "Swathi"]
-    zero_mean=False
+    zero_mean=True
     # "Nakul", "Divya", "Swathi"
 
     if plot_pca:
@@ -350,8 +354,9 @@ if False :
     else:
         # if sum_wise:
         score_convq, score_kappa, final_average_convq, final_average_kappa, groups_label = get_final_convq_score_for(annotation_file=file,
-                                                                                                                    manifestation=manifest,
-                                                                                                                    annotators=annotators, zero_mean=zero_mean)
+                                                                                                                     manifestation=manifest,
+                                                                                                                     annotators=annotators,
+                                                                                                                     zero_mean=zero_mean)
         # print(groups_label)
         print("(Calculated Overall) Mean Pair-wise CONVQ - " + str(score_convq))
         if plot_final_convq:

@@ -6,6 +6,7 @@ import constants
 import pandas as pd
 import numpy as np
 
+# best = {1-5}
 normal_conversion_dict = {
 "Strongly disagree" : 1,
 "Disagree" : 2,
@@ -146,6 +147,9 @@ def derive_convq_scores_for_reponses(annotators, annotation_file=constants.group
     if zero_mean:
         skip_column=['Annotator Name', 'Group ID', 'Individual ID']
         for i, annotator in enumerate(annotators):
+            # annotator_mean = int(np.mean(np.mean(cleaned_annotation.loc[cleaned_annotation['Annotator Name'] == annotator])[2:]))
+            # print("Anntoator MEan")
+            # print(annotator_mean)
             for column in cleaned_annotation.columns:
                 if column not in skip_column:
                     annotator_ques_responses = cleaned_annotation.loc[cleaned_annotation['Annotator Name'] == annotator][column]
