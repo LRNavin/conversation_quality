@@ -183,7 +183,7 @@ def get_pairwise_agreeability_score(annotation_file, manifestation, annotators, 
 
 def get_final_convq_score_for(annotation_file=constants.group_conq_annot_data, manifestation="group", annotators=["Nakul", "Swathi", "Divya"], zero_mean=False):
     # Get Conversation Quality Scores
-    print("HEREREERERERERRERer")
+    # print("HEREREERERERERRERer")
     final_average_convq, groups_label_1 = get_pairwise_agreeability_score(annotation_file, manifestation, annotators, False)
     # Get Inter-Rater Agreeability for ConvQ scores
     pairwise_kappa_score, final_average_kappa, groups_label_2 = get_final_groupwise_agreeability_score_for(annotation_file, manifestation, annotators, zero_mean)

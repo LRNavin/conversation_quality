@@ -1,4 +1,4 @@
-# from pyitlib import discrete_random_variable as drv
+from pyitlib import discrete_random_variable as drv
 import feature_extract.mimicry_model as mimicry_extractor
 
 import numpy as np
@@ -24,11 +24,11 @@ def get_mutual_info_between(individual1_acc, individual2_acc, norm=True):
     for segment in range(individual1_acc.shape[1]):
         indiv1_acc = individual1_acc[:,segment]
         indiv2_acc = individual2_acc[:,segment]
-        # if norm:
-        #     curr_mi = drv.information_mutual_normalised(indiv1_acc, indiv2_acc, 'SQRT')
-        # else:
-        #     curr_mi = drv.information_mutual(indiv1_acc, indiv2_acc)
-        # mi.append(curr_mi)
+        if norm:
+            curr_mi = drv.information_mutual_normalised(indiv1_acc, indiv2_acc, 'SQRT')
+        else:
+            curr_mi = drv.information_mutual(indiv1_acc, indiv2_acc)
+        mi.append(curr_mi)
 
     return mi
 
@@ -110,7 +110,7 @@ def get_synchrony_features_for(group_accel_data, features=["correl", "lag-correl
     members = group_accel_data.keys()
     for member1 in members:
         for member2 in members:
-            # No Same Person and Not same pair if already calculated # TODO: Remove this same pair check, Useful for assymetric features
+            # No Same Person and Not same pair if already calculated # TODO: Remove this same pair check, Useful for assymetric features (DONE)
             if member1 != member2: #and (str(member2)+"_"+str(member1) not in group_pairwise_features.keys()):
                 if len(group_accel_data[member1]) != 0 and len(group_accel_data[member2]) != 0 : #Missing Acc
                     print("===Synchrony Members - " + str(member1) + " and " + str(member2) + " ===")
