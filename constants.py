@@ -24,6 +24,10 @@ data_name           = "Mingle_30min"
 
 # F-Formation Details data Constants
 fform_annot_data    = dataset_base_folder + annotations_path + "groups_GT.ods"
+labels_annot        = dataset_base_folder + annotations_path + "LABELS.csv"
+lost_annot          = dataset_base_folder + annotations_path + "LOST.csv"
+participant_annot   = dataset_base_folder + annotations_path + "PARTICIPANTS.csv"
+
 
 # Conversation Quality Annotations
 group_conq_annot_data = dataset_base_folder + annotations_path + "GroupConvQ-final.csv"
@@ -37,3 +41,9 @@ fform_gt_data       = temp_dataset_store + "all_groups_final.csv"
 #Features Dataset paths
 features_dataset_path    = main_dataset_storage + "features_dataset.pickle"
 features_dataset_path_v1 = main_dataset_storage + "features_dataset_v1.pickle"
+features_tt_path         = main_dataset_storage + "annotations.pickle"
+
+# Constants - Data Reader
+LABELS     = ["Walking", "Stepping", "Drinking", "Speaking", "Hand_Gesture",
+              "Head_Gesture", "Laugh", "Hair_Touching", "Action_Occluded"]
+N_LABELS   = len(LABELS)

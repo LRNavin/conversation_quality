@@ -81,7 +81,7 @@ zero_mean  = False
 dataset=constants.features_dataset_path_v1
 
 
-# In[5]:
+# In[18]:
 
 
 # Functions 
@@ -159,24 +159,20 @@ class Baseline_NN(nn.Module):
         # ASsuming input dim (# features) is around > 10K
         super(Baseline_NN, self).__init__()
         print("Input Dimension is " + str(input_dim))
-        self.inp_lay = nn.Linear(input_dim, int(input_dim/10))
-#         self.inp_lay = nn.Linear(input_dim, int(input_dim*2/10)) 
-        self.hiddn_1 = nn.Linear(int(input_dim/10), int(input_dim/100))
-#         self.hiddn_1 = nn.Linear(int(input_dim*2/10), int(input_dim*2/100))
-        self.hiddn_2 = nn.Linear(int(input_dim/100), int(input_dim/1000))
-#         self.hiddn_2 = nn.Linear(int(input_dim*2/100), int(input_dim*2/1000))
-#         self.hiddn_3 = nn.Linear(int(input_dim/200), int(input_dim/2000))
-        self.out_lay = nn.Linear(int(input_dim/1000), 1) 
+#         self.inp_lay = nn.Linear(input_dim, int(input_dim/10))
+        self.inp_lay = nn.Linear(input_dim, int(input_dim*2))
+        self.hiddn_1 = nn.Linear(int(input_dim*2), int(input_dim*2/10))
+        self.hiddn_2 = nn.Linear(int(input_dim*2/10), int(input_dim*2/100))
+        self.hiddn_3 = nn.Linear(int(input_dim*2/100), int(input_dim*2/1000))
+        self.out_lay = nn.Linear(int(input_dim*2/1000), 1) 
 
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(p=0.2)
-        self.batchnorm_il = nn.BatchNorm1d(int(input_dim/10))
-#         self.batchnorm_il = nn.BatchNorm1d(int(input_dim*2/10))
-        self.batchnorm_h1 = nn.BatchNorm1d(int(input_dim/100))
-#         self.batchnorm_h1 = nn.BatchNorm1d(int(input_dim*2/100))
-        self.batchnorm_h2 = nn.BatchNorm1d(int(input_dim/1000))
-#         self.batchnorm_h2 = nn.BatchNorm1d(int(input_dim*2/1000))
-#         self.batchnorm_h3 = nn.BatchNorm1d(int(input_dim/2000))
+
+        self.batchnorm_il = nn.BatchNorm1d(int(input_dim*2))
+        self.batchnorm_h1 = nn.BatchNorm1d(int(input_dim*2/10))
+        self.batchnorm_h2 = nn.BatchNorm1d(int(input_dim*2/100))
+        self.batchnorm_h3 = nn.BatchNorm1d(int(input_dim*2/1000))
 
     def forward(self, inputs):
         # Input Layer 
@@ -198,8 +194,8 @@ class Baseline_NN(nn.Module):
         x = self.dropout(x)
         
         # Hidden Layer 3
-#         x = self.relu(self.hiddn_3(x))
-#         x = self.batchnorm_h3(x)
+        x = self.relu(self.hiddn_3(x))
+        x = self.batchnorm_h3(x)
         
         x = self.dropout(x)
 
@@ -260,15 +256,10 @@ def train_nn_model(model, train_loader, weight, num_epochs):
     for e in tqdm(range(1, num_epochs+1)):
         epoch_loss = 0
         epoch_acc = 0
-#         print(train_loader)
         for data in train_loader:
-#             print(data)
             X_batch, y_batch = data
             optimizer.zero_grad()
             y_pred = model(X_batch)
-            
-#             print(y_pred)
-#             print(y_batch.unsqueeze(1))
 
             loss = criterion(y_pred, y_batch.unsqueeze(1))
             acc  = binary_acc(y_pred, y_batch.unsqueeze(1))
@@ -292,10 +283,8 @@ def predict_with_nn(test_loader, model):
             y_test_pred = torch.sigmoid(y_test_pred)
             y_pred_tag  = torch.round(y_test_pred)
             y_pred_list.append(y_pred_tag)
-#             print(y_pred_tag)
 
     y_pred_list = [a.squeeze().tolist() for a in y_pred_list]
-#     print(y_pred_list)
     return y_pred_list
 
 
@@ -322,7 +311,7 @@ X, y, ids = data_gen.get_dataset_for_experiment(dataset=dataset,
 y = process_convq_labels(y, label_type)
 
 
-# In[8]:
+# In[ ]:
 
 
 # Data Prep
@@ -335,7 +324,7 @@ final_expl_vari = 0.0
 
 # Neural Net variables
 batch_size=10
-num_epochs=100
+num_epochs=10
 
 # skf = StratifiedKFold(n_splits=splits)
 # for train_index, test_index in skf.split(X, y):
@@ -385,8 +374,8 @@ print(conf_matrix)
 print(auc_score)
 
 #Update Cross Validated scores
-final_conf_matrix =  conf_matrix
-final_auc_score = auc_score
+final_conf_matrix = final_conf_matrix + conf_matrix
+final_auc_score = final_auc_score + auc_score
 #     final_r_squared = final_r_squared + r_squared
 #     final_expl_vari = final_expl_vari + expl_vari
 
@@ -395,7 +384,7 @@ final_auc_score = auc_score
 # final_expl_vari = final_expl_vari/skf.get_n_splits(X, y)
 
 
-# In[ ]:
+# In[16]:
 
 
 # Printing Final Score

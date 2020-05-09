@@ -8,8 +8,10 @@ import pandas as pd
 # import ezodf
 import datetime
 import pickle
+import constants
 
 import utilities.data_proc_util as data_processor
+from annotations import load_annotations as loader
 
 def open_dataset(filename=const.dataset_name):
     data = loadmat(const.dataset_base_folder+const.dataset_file_path+filename,
@@ -67,10 +69,13 @@ def get_group_data(group_id="1_000"):
 def get_members_in_f_form(group_id="1_000"):
     return get_group_data(group_id)['subjects'].values[0]
 
-def get_temporal_data_in_f_form(group_id="1_000"):
+def get_temporal_data_in_f_form(group_id="1_000", return_end=False):
     group = get_group_data(group_id)
     start, end = group['samplestart'].values[0], group['sampleend'].values[0]
-    return start, end-start
+    if return_end:
+        return start, end
+    else:
+        return start, end-start
 
 def get_accel_data_from_f_form(filename=const.dataset_name, group_id="1_000"):
     '''
@@ -134,6 +139,25 @@ def get_annotated_fformations(annotation_file=const.fform_annot_data, from_final
         #                                     process_annotation_sheet(sheet)))
         #         groups[sheet.name].to_csv(const.temp_grps_day+str(i+1)+".csv")
     return groups
+
+
+def load_speaking_annotations(day=1, participant_id=1, start_time=None, end_time=None,
+                              annotation_file=constants.features_tt_path, from_store=True):
+    # Real whole Dataframe as MultiIndex
+    if from_store:
+        tt_df = pd.read_pickle(annotation_file)
+    else:
+        tt_df = loader.load_annotations(constants.labels_annot, constants.lost_annot, constants.participant_annot)
+
+    # Filter required annotations - For Day, Participant and Time Duration
+    if start_time and end_time:
+        # Return data from start_time to end_time
+        ps_speaking = tt_df.loc[start_time:end_time, (day, participant_id,'Speaking')]
+    else:
+        # Return whole 30-min data
+        ps_speaking = tt_df.loc[:, (day, participant_id,'Speaking')]
+    print("Speaking Status for - Participant = " + str(participant_id) + " in Day = " + str(day) + ". From time " + str(start_time) + " to " +  str(end_time) +".")
+    return ps_speaking
 
 def clean_and_store_fform_annotations(annotation_file):
     groups = get_annotated_fformations(annotation_file, from_store=False)
