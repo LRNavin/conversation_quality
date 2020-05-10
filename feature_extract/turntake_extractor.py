@@ -7,6 +7,7 @@ import numpy as np
 # Particular Feature Extarctor fucntions - Indiv-level and Group-level
 
 # Individual Base
+# 1. Conversation Equality:
 def get_number_of_turns_for_indiv(indiv_speaking_data):
     number_of_turns=0
     for i, curr_status in enumerate(indiv_speaking_data.values):
@@ -23,50 +24,66 @@ def get_mean_turn_duration_for_indiv(indiv_speaking_data):
     for i, curr_status in enumerate(indiv_speaking_data.values):
         if curr_status == 1: # Turn Begins/Continues
             curr_turn_duration = curr_turn_duration + 1 # Increase turn duration
-        else: # Silence Begins/Continues
+        elif curr_status == 0: # Silence Begins/Continues
             turn_durations.extend(curr_turn_duration)
             curr_turn_duration = 0 # Reset turn duration counter
     return np.mean(turn_durations)
 
+def get_percent_talk_for_indiv(indiv_speaking_data):
+    total_talk_time = np.sum(indiv_speaking_data.values)
+    return total_talk_time/len(indiv_speaking_data.values)
+
+# 2. Conversation Fluency:
 def get_mean_silence_duration_for_indiv(indiv_speaking_data):
     silence_durations = []
     curr_silence_duration = 0
     for i, curr_status in enumerate(indiv_speaking_data.values):
         if curr_status == 0:  # Silence Begins/Continues
             curr_silence_duration = curr_silence_duration + 1  # Increase turn duration
-        else:  # Turn Begins/Continues
+        elif curr_status == 1:  # Turn Begins/Continues
             silence_durations.extend(curr_silence_duration)
             curr_silence_duration = 0  # Reset turn duration counter
     return np.mean(silence_durations)
-
-def get_percent_talk_for_indiv(indiv_speaking_data):
-    total_talk_time = np.sum(indiv_speaking_data.values)
-    return total_talk_time/len(indiv_speaking_data.values)
 
 def get_percent_silence_for_indiv(indiv_speaking_data):
     total_silence_time = len(indiv_speaking_data.values) - np.sum(indiv_speaking_data.values)
     return total_silence_time/len(indiv_speaking_data.values)
 
+# TODO: 3. Conversation Synchronisation:
+
+# TODO: 4. Conversation Freedom:
+
 
 # Group Based
+# 1. Conversation Equality:
 def get_mean_number_of_turns_for_group(group_speaking_data):
     return 0
 
 def get_mean_turn_duration_for_group(group_speaking_data):
     return 0
 
+def get_conv_equality_score_for_group(group_speaking_data):
+    return 0
+
+# 2. Conversation Fluency:
 def get_mean_silence_duration_for_group(group_speaking_data):
     return 0
 
 def get_total_silence_duration_for_group(group_speaking_data):
     return 0
 
+# 3. Conversation Synchronisation:
 def get_percent_overlap_for_group(group_speaking_data):
     return 0
 
-def get_conv_equality_score_for_group(group_speaking_data):
+def get_number_of_successful_interupt_for_group(group_speaking_data):
     return 0
 
+
+def get_number_of_unsuccessful_interupt_for_group(group_speaking_data):
+    return 0
+
+# 3. Conversation Freedom:
 def get_conv_freedom_score_for_group(group_speaking_data):
     return 0
 
