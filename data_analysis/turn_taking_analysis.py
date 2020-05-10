@@ -1,3 +1,5 @@
+import itertools
+
 from annotations import load_annotations as loader
 
 import pandas as pd
@@ -22,4 +24,10 @@ def load_speaking_annotations(day=1, participant_id=1, start_time=None, end_time
     print(ps_speaking)
     return ps_speaking
 
-# load_speaking_annotations(day=1, participant_id=1, start_time=400, end_time=1500)
+print(load_speaking_annotations(day=1, participant_id=1).values)
+ps = "".join(load_speaking_annotations(day=1, participant_id=1).values.astype(str))
+
+# import itertools.groupby as groupby
+import numpy as np
+c=np.array([[k, len(list(g))] for k, g in itertools.groupby(ps)])
+print(c)
