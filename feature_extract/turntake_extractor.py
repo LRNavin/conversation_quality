@@ -143,28 +143,24 @@ def get_percent_overlap_for_group(group_speaking_data):
     is_overlap = np.where(np.sum(group_speaking_data, axis=0) > 0, 1, 0)
     return np.sum(is_overlap)/len(is_overlap)
 
-def get_number_of_successful_interupt_for_group(group_speaking_data, group_members, group_id):
-    members_suc_interupt = []
-    day=group_id.split("_")[0]
-    start_time, end_time  = data_reader.get_temporal_data_in_f_form(group_id=group_id, return_end=True)
-    rest_group_members = list(group_members)
-    for i, curr_member in zip(range(group_speaking_data.shape[0]), group_members):
-        rest_group_members.remove(curr_member)
-        rest_group_data = get_stacked_group_speaking_data(rest_group_members, day, start_time, end_time)
+def get_number_of_successful_interupt_for_group(group_speaking_data):
+    members_suc_interupt=[]
+    select_indxs=list(range(group_speaking_data.shape[0]))
+    for i in range(group_speaking_data.shape[0]):
+        select_indxs.remove(i)
+        rest_group_data=np.take(group_speaking_data,select_indxs,axis=0)
         members_suc_interupt.extend([get_number_of_interupt_for_indiv(group_speaking_data[i, :], rest_group_data)[0]])
-        rest_group_members = list(group_members)
+        select_indxs = list(range(group_speaking_data.shape[0]))
     return np.sum(members_suc_interupt)
 
-def get_number_of_unsuccessful_interupt_for_group(group_speaking_data, group_members, group_id):
-    members_unsuc_interupt = []
-    day=group_id.split("_")[0]
-    start_time, end_time  = data_reader.get_temporal_data_in_f_form(group_id=group_id, return_end=True)
-    rest_group_members=list(group_members)
-    for i, curr_member in zip(range(group_speaking_data.shape[0]), group_members):
-        rest_group_members.remove(curr_member)
-        rest_group_data = get_stacked_group_speaking_data(rest_group_members, day, start_time, end_time)
+def get_number_of_unsuccessful_interupt_for_group(group_speaking_data):
+    members_unsuc_interupt=[]
+    select_indxs=list(range(group_speaking_data.shape[0]))
+    for i in range(group_speaking_data.shape[0]):
+        select_indxs.remove(i)
+        rest_group_data=np.take(group_speaking_data,select_indxs,axis=0)
         members_unsuc_interupt.extend([get_number_of_interupt_for_indiv(group_speaking_data[i, :], rest_group_data)[1]])
-        rest_group_members=list(group_members)
+        select_indxs = list(range(group_speaking_data.shape[0]))
     return np.sum(members_unsuc_interupt)
 
 # TODO: 4. Conversation Freedom: - May not work in dyads
@@ -211,9 +207,9 @@ def get_group_tt_features_for(group_id, features=["#turns", "mean_turn", "mean_s
         elif tt_feat == "%overlap":
             tt_features.extend([get_percent_overlap_for_group(group_speaking_data)])
         elif tt_feat == "#suc_interupt":
-            tt_features.extend([get_number_of_successful_interupt_for_group(group_speaking_data, group_members, group_id)])
+            tt_features.extend([get_number_of_successful_interupt_for_group(group_speaking_data)])
         elif tt_feat == "#un_interupt":
-            tt_features.extend([get_number_of_unsuccessful_interupt_for_group(group_speaking_data, group_members, group_id)])
+            tt_features.extend([get_number_of_unsuccessful_interupt_for_group(group_speaking_data)])
         # Conv Free ["conv_free"]
         elif tt_feat == "conv_free":
             tt_features.extend([get_conv_freedom_score_for_group(group_speaking_data)])
