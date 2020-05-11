@@ -143,6 +143,8 @@ def get_annotated_fformations(annotation_file=const.fform_annot_data, from_final
 
 def load_speaking_annotations(day=1, participant_id=1, start_time=None, end_time=None,
                               annotation_file=constants.features_tt_path, from_store=True):
+    # Data-type formatter
+    day, participant_id = int(day), int(participant_id)
     # Real whole Dataframe as MultiIndex
     if from_store:
         tt_df = pd.read_pickle(annotation_file)
@@ -157,7 +159,7 @@ def load_speaking_annotations(day=1, participant_id=1, start_time=None, end_time
         # Return whole 30-min data
         ps_speaking = tt_df.loc[:, (day, participant_id,'Speaking')]
     print("Speaking Status for - Participant = " + str(participant_id) + " in Day = " + str(day) + ". From time " + str(start_time) + " to " +  str(end_time) +".")
-    return ps_speaking
+    return ps_speaking.values.tolist()
 
 def clean_and_store_fform_annotations(annotation_file):
     groups = get_annotated_fformations(annotation_file, from_store=False)

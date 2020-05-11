@@ -24,10 +24,11 @@ def load_speaking_annotations(day=1, participant_id=1, start_time=None, end_time
     print(ps_speaking)
     return ps_speaking
 
-print(load_speaking_annotations(day=1, participant_id=1).values)
-ps = "".join(load_speaking_annotations(day=1, participant_id=1).values.astype(str))
+# ('1', '13', 'Speaking')
+# print(load_speaking_annotations(day=1, participant_id=13).values)
+# ps = "".join(load_speaking_annotations(day=1, participant_id=1).values.astype(str))
 
 # import itertools.groupby as groupby
-import numpy as np
-c=np.array([[k, len(list(g))] for k, g in itertools.groupby(ps)])
-print(c)
+# import numpy as np
+# c=np.array([[k, len(list(g))] for k, g in itertools.groupby(ps)])
+# print(c)

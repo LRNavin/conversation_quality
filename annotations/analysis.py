@@ -342,7 +342,7 @@ def perform_pca_analysis_on(annotation_file=constants.group_conq_annot_data, man
 # IMPORTANT FOR MODELLING
 measure="kappa"
 
-if True:
+if False:
     manifest="group"
     file=constants.group_conq_annot_data
     annotators=["Nakul", "Divya"]#, "Swathi"]
