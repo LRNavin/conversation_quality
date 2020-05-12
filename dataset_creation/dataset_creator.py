@@ -48,6 +48,7 @@ def extract_and_save_dataset(dest_file, channels, stat_features, spec_features, 
 
 #BASED ON MISS INDIV ACC and LOW ANNOTATOR RELIABILITY
 # Groups and Indiividuals - Data selection based on agreeability scores:
+# USed for analysis on reliable convq scores - e.g. statistical tests
 def get_annotation_realiable_labels(agreeability_thresh, manifest, annotators, zero_mean):
     if manifest == "group":
         file = const.group_conq_annot_data
@@ -95,7 +96,6 @@ def get_pairs_involved_by_indiv(missing_filtered_data, grp_id, ind_id, indiv_pai
 
 
 # THE ONLY DIRTY CODE - WROTE IN A BAD MOOD :(
-# TODO: Check Dataset order w.r.t ids once
 def filter_dataset(features_data_path, missing_data_thresh, agreeability_thresh, manifest, annotators, only_involved_pairs, zero_mean):
     features_data = reader.load_pickle(features_data_path)
     missing_filtered_data = {}
@@ -147,3 +147,22 @@ def filter_dataset(features_data_path, missing_data_thresh, agreeability_thresh,
     print("Number of Final Data-points (After removing unreliable annotation data) - " + str(len(agreeability_filtered_data.keys())))
 
     return agreeability_filtered_data, final_item_ids, final_convq_scores
+
+# TODO: funcitons can be converted to more efficient lambda / vectorised methods
+def get_all_group_sizes_for_group(group_ids):
+    group_sizes=[]
+    for id in group_ids:
+        group_sizes.append(len(reader.get_members_in_f_form(group_id=id)))
+    return group_sizes
+
+def extract_grp_ids_from_indiv_ids(indiv_ids):
+    group_ids = []
+    for curr_indiv_id in indiv_ids:
+        group_ids.append(curr_indiv_id.split("_")[0] + "_" + curr_indiv_id.split("_")[1])
+    return group_ids
+
+def get_group_sizes_for_ids(ids, manifest):
+    if manifest == "group":
+        return get_all_group_sizes_for_group(ids)
+    else:
+        return get_all_group_sizes_for_group(extract_grp_ids_from_indiv_ids(ids))

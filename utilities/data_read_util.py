@@ -158,8 +158,11 @@ def load_speaking_annotations(day=1, participant_id=1, start_time=None, end_time
     else:
         # Return whole 30-min data
         ps_speaking = tt_df.loc[:, (day, participant_id,'Speaking')]
-    print("Speaking Status for - Participant = " + str(participant_id) + " in Day = " + str(day) + ". From time " + str(start_time) + " to " +  str(end_time) +".")
-    return ps_speaking.values.tolist()
+    # print("Speaking Status for - Participant = " + str(participant_id) + " in Day = " + str(day) + ". From time " + str(start_time) + " to " +  str(end_time) +".")
+
+    # Filter for -1 (missing data)
+    ps_speaking = np.where(ps_speaking.values == -1, 0, ps_speaking.values)
+    return ps_speaking.tolist()
 
 def clean_and_store_fform_annotations(annotation_file):
     groups = get_annotated_fformations(annotation_file, from_store=False)
