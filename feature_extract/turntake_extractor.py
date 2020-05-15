@@ -5,19 +5,22 @@ import numpy as np
 import itertools
 from tqdm import tqdm
 
-# TODO: Skip Conversation Freedom
-
 # VARIABLES
 turn_min_length=20
 turn_silence_length=10
 bc_max_length=20
 
-
-
 # Particular Feature Extarctor fucntions - Indiv-level and Group-level
 
 # Individual Base
 # 1. Conversation Equality:
+def get_conv_equality_for_indiv(indiv_speaking_data, rest_group_data):
+    # W.r.t Catherine Lai - variable names
+    T_i = np.sum(indiv_speaking_data)
+    group_speaking_data = np.vstack((rest_group_data, indiv_speaking_data))
+    T = np.mean(np.sum(group_speaking_data, axis=1))
+    return (T_i - T)/T
+
 def get_number_of_turns_for_indiv(indiv_speaking_data):
     number_of_turns=0
     segments=np.array([[k, len(list(g))] for k, g in itertools.groupby(indiv_speaking_data)])
@@ -89,7 +92,6 @@ def get_number_of_interupt_for_indiv(indiv_speaking_data, rest_group_data):
     is_turn_overlapping=False
 
     # This is required to handle dyadic rest of the groups
-    # TODO: Fixed in 2 places. Check whether other places require this
     # Only required in Overlap and interupt of Indiv. So i think fixed in all 2 places.
     if type(rest_group_data) != list:
         rest_group_status = np.sum(rest_group_data, axis=0)
@@ -256,8 +258,10 @@ def get_indiv_tt_features_for(group_indiv_id, features=["#turns", "mean_turn", "
     rest_group_members.remove(indiv_id)
     rest_group_data = get_stacked_group_speaking_data(rest_group_members, day, start_time, end_time)
     for tt_feat in features:
-        # Conv Eq ["#turns", "%talk", "mean_turn"]
-        if tt_feat == "#turns":
+        # Conv Eq ["conv_eq", "#turns", "%talk", "mean_turn"]
+        if tt_feat == "conv_eq":
+            tt_features.extend([get_conv_equality_for_indiv(indiv_speaking_status, rest_group_data)])
+        elif tt_feat == "#turns":
             tt_features.extend([get_number_of_turns_for_indiv(indiv_speaking_status)])
         elif tt_feat == "%talk":
             tt_features.extend([get_percent_talk_for_indiv(indiv_speaking_status)])
@@ -329,10 +333,10 @@ from dataset_creation import dataset_creator as data_generator
 test_manifest=""
 
 if test_manifest=="indiv":
-    features=["#turns", "%talk", "mean_turn", "mean_silence", "%silence", "#bc", "%overlap", "#suc_interupt", "#un_interupt"]
+    features=["conv_eq"]#["#turns", "%talk", "mean_turn", "mean_silence", "%silence", "#bc", "%overlap", "#suc_interupt", "#un_interupt"]
     print(get_indiv_tt_features_for("1_018_35", features))
     print(features)
 elif test_manifest=="group":
     features = ["var_#turn", "var_dturn", "conv_eq", "mean_silence", "%silence", "#bc", "%overlap", "#suc_interupt", "#un_interupt"]
-    print(get_group_tt_features_for("1_005", features))
+    print(get_group_tt_features_for("1_018", features))
     print(features)
