@@ -2,6 +2,7 @@
 #!/usr/bin/env python
 # from pandas_ods_reader import read_ods
 from scipy.io import loadmat
+from scipy import stats
 import constants as const
 import numpy as np
 import pandas as pd
@@ -41,6 +42,10 @@ def get_accel_data_from_participant(filename=const.dataset_name,
             return member.accel
     return None
 
+def z_norm_accel_data(accel_data):
+    accel_data = stats.zscore(accel_data, axis=0)
+    return accel_data
+
 def get_accel_data_from_participant_between(filename=const.dataset_name, day=1, participant_id=1,
                                             start_time=0, duration=10):
     '''
@@ -50,10 +55,15 @@ def get_accel_data_from_participant_between(filename=const.dataset_name, day=1, 
 
     full_member_data  = np.array(get_accel_data_from_participant(filename=filename, day=day,
                                                                  participant_id=participant_id))
+
     # print("From: " + str(start_time) + ", For: " + str(duration))
     if len(full_member_data) == 0:
         member_data_timed = full_member_data
     else:
+        # Z-Normalise - Remove interpersonal differences in movement intensity
+        # print("Shape Before Z-Norm -> " + str(full_member_data.shape))
+        full_member_data = z_norm_accel_data(full_member_data)
+        # print("After Before Z-Norm -> " + str(full_member_data.shape))
         member_data_timed = full_member_data[(start_time):(start_time+duration), :]
     return member_data_timed
 

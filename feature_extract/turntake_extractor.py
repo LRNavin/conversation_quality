@@ -8,9 +8,9 @@ from tqdm import tqdm
 # TODO: Skip Conversation Freedom
 
 # VARIABLES
-turn_min_length=40
+turn_min_length=20
 turn_silence_length=10
-bc_max_length=40
+bc_max_length=20
 
 
 

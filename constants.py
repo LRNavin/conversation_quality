@@ -41,6 +41,8 @@ fform_gt_data       = temp_dataset_store + "all_groups_final.csv"
 #Features Dataset paths
 features_dataset_path    = main_dataset_storage + "features_dataset.pickle"
 features_dataset_path_v1 = main_dataset_storage + "features_dataset_v1.pickle"
+features_dataset_path_v2 = main_dataset_storage + "features_dataset_v2.pickle"
+
 features_tt_path         = main_dataset_storage + "annotations.pickle"
 indiv_tt_X_path          = main_dataset_storage + "indiv_tt_X.csv"
 group_tt_X_path          = main_dataset_storage + "group_tt_X.csv"
