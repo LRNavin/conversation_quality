@@ -25,7 +25,7 @@ def get_mutual_info_between(individual1_acc, individual2_acc, norm=True):
         indiv1_acc = individual1_acc[:,segment]
         indiv2_acc = individual2_acc[:,segment]
         if norm:
-            curr_mi = drv.information_mutual_normalised(indiv1_acc, indiv2_acc, 'SQRT')
+            curr_mi = 0#drv.information_mutual_normalised(indiv1_acc, indiv2_acc, 'SQRT')
         else:
             curr_mi = drv.information_mutual(indiv1_acc, indiv2_acc)
         mi.append(curr_mi)
