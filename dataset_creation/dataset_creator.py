@@ -14,33 +14,41 @@ import numpy as np
 
 
 def generate_indiv_dataset_from_all_groups(channels,
+                                           acc_norm,
                                            stat_features, spec_features, windows, step_size,
                                            sync_feats, conver_feats):
     all_groupids = reader.get_all_annotated_groups()["groupid"].values
     groupwise_indiv_acc = {}
     for group_id in tqdm(all_groupids):
-        group_acc = processor.get_accelerometer_channels_for(group_id=group_id, channels=channels)
+        group_acc = processor.get_accelerometer_channels_for(group_id=group_id, acc_norm=acc_norm, channels=channels)
 
         # Extract Base Statistical, Spectral Features
         group_acc = base_feat_extractor.get_base_features_for(group_accel_data=group_acc,
                                                               stat_features=stat_features,
                                                               spec_features=spec_features,
                                                               windows=windows, step_size=step_size)
+        print("Base Features Extracted")
+
         # Extract Synchrony features
         group_pairwise_sync = sync_extractor.get_synchrony_features_for(group_acc, features=sync_feats)
+        print("Synchrony Features Extracted")
+
         # Extract Convergence features
         group_pairwise_conv = conv_extractor.get_convergence_features_for(group_acc, features=conver_feats)
+        print("Convergence Features Extracted")
+
         group_pairwise_features = post_processor.concatenate_pairwise_features(group_pairwise_sync, group_pairwise_conv)
 
         groupwise_indiv_acc[group_id] = group_pairwise_features
     return groupwise_indiv_acc
 
 
-def extract_and_save_dataset(dest_file, channels, stat_features, spec_features, windows, step_size, sync_feats, conver_feats):
+def extract_and_save_dataset(dest_file, acc_norm, channels, stat_features, spec_features, windows, step_size, sync_feats, conver_feats):
     features_data = generate_indiv_dataset_from_all_groups(channels = channels,
-                                                         stat_features=stat_features, spec_features=spec_features,
-                                                         windows=windows, step_size=step_size,
-                                                         sync_feats=sync_feats, conver_feats=conver_feats)
+                                                           acc_norm = acc_norm,
+                                                           stat_features=stat_features, spec_features=spec_features,
+                                                           windows=windows, step_size=step_size,
+                                                           sync_feats=sync_feats, conver_feats=conver_feats)
 
     data_util.save_pickle(features_data, dest_file)
     print("~~~~~~~~~~~~~~~~~~~~ data saved ~~~~~~~~~~~~~~~~~~~~~")

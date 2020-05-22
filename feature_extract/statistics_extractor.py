@@ -132,11 +132,14 @@ def get_windowed_base_features_for(group_data, stat_features=["mean", "var"],
     group_windowed_data = {}
     for window in windows:
         # print("~~ FOR WINDOW - " + str(window) + " ~~")
-        stat_accel_data = get_windowed_statistical_features_for(group_data, stat_features, window, step_size)
-        spec_accel_data = get_windowed_spectral_features_for(group_data, spec_features, window, step_size)
-        group_windowed_data[str(window)] = np.concatenate((stat_accel_data, spec_accel_data), axis=1)
+        if window == 0:
+            # Consider as raw-signals, without windowed features
+            group_windowed_data[str(window)] = np.transpose(group_data)
+        else:
+            stat_accel_data = get_windowed_statistical_features_for(group_data, stat_features, window, step_size)
+            spec_accel_data = get_windowed_spectral_features_for(group_data, spec_features, window, step_size)
+            group_windowed_data[str(window)] = np.concatenate((stat_accel_data, spec_accel_data), axis=1)
         # print("AFTER BASE FEATURE EXTRACTION, SHAPE - " + str(group_windowed_data[str(window)].shape))
-
     return group_windowed_data
 
 
@@ -146,7 +149,7 @@ def get_base_features_for(group_accel_data, stat_features=["mean", "var"],
     step_size = int(step_size * 20) #Convert to samples . 1sec = 20Hz
     windows = [w * 20 for w in windows] #Convert to samples . 1sec = 20Hz
     for member in group_accel_data.keys():
-        print("===Extracting BASE Features: Member "+ str(member) + " ===" )
+        # print("===Extracting BASE Features: Member "+ str(member) + " ===" )
         # print(group_accel_data[member].shape)
         if len(group_accel_data[member]) != 0:
             group_accel_data[member] = get_windowed_base_features_for(group_accel_data[member],

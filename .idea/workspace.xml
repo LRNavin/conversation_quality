@@ -2,10 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50d676cd-c199-4a32-8ab8-1860606fb780" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/main_experiment/predicitve_modeling/.ipynb_checkpoints/baseline-improv-v1-checkpoint.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/predicitve_modeling/.ipynb_checkpoints/baseline-improv-v2-checkpoint.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/predicitve_modeling/baseline-improv-v1.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/predicitve_modeling/baseline-improv-v2.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/predicitve_modeling/baseline.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/predicitve_modeling/baseline.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/predicitve_modeling/neural_net_v1.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/predicitve_modeling/neural_net_v1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic_experiment/scratch_pad_tester.py" beforeDir="false" afterPath="$PROJECT_DIR$/basic_experiment/scratch_pad_tester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset_creation/dataset_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset_creation/dataset_creator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset_creation/feature_extraction_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset_creation/feature_extraction_script.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/feature_extract/convergence_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/convergence_extractor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/feature_extract/feature_preproc.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/feature_preproc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/feature_extract/features_postproc.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/features_postproc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/feature_extract/statistics_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/statistics_extractor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/feature_extract/synchrony_extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_extract/synchrony_extractor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/statistical_tests/.ipynb_checkpoints/tt_vs_convq-indiv-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/.ipynb_checkpoints/tt_vs_convq-indiv-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/statistical_tests/tt_vs_convq-indiv.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/tt_vs_convq-indiv.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/baseline-improv-v1.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/baseline.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/baseline.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/neural_net_v1.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/neural_net_v1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/statistical_tests/grpsize_vs_convq-group.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/grpsize_vs_convq-group.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/statistical_tests/grpsize_vs_convq-indiv.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/grpsize_vs_convq-indiv.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/statistical_tests/tt_vs_convq-group.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/tt_vs_convq-group.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modeling/dataset_provider.py" beforeDir="false" afterPath="$PROJECT_DIR$/modeling/dataset_provider.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/data_read_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/data_read_util.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +77,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.turntake_extractor">
+  <component name="RunManager" selected="Python.feature_extraction_script">
     <configuration name="feature_extraction_script" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="conversation_quality" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -161,8 +185,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.turntake_extractor" />
         <item itemvalue="Python.feature_extraction_script" />
+        <item itemvalue="Python.turntake_extractor" />
         <item itemvalue="Python.tt_vs_convq" />
         <item itemvalue="Python.turn_taking_analysis" />
         <item itemvalue="Python.load_annotations" />

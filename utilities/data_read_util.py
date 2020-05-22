@@ -46,7 +46,7 @@ def z_norm_accel_data(accel_data):
     accel_data = stats.zscore(accel_data, axis=0)
     return accel_data
 
-def get_accel_data_from_participant_between(filename=const.dataset_name, day=1, participant_id=1,
+def get_accel_data_from_participant_between(filename=const.dataset_name, acc_norm=True, day=1, participant_id=1,
                                             start_time=0, duration=10):
     '''
     start_time, duration in sample rates(hz) i.e 1 sec = 20 samples
@@ -60,10 +60,11 @@ def get_accel_data_from_participant_between(filename=const.dataset_name, day=1, 
     if len(full_member_data) == 0:
         member_data_timed = full_member_data
     else:
-        # Z-Normalise - Remove interpersonal differences in movement intensity
-        # print("Shape Before Z-Norm -> " + str(full_member_data.shape))
-        full_member_data = z_norm_accel_data(full_member_data)
-        # print("After Before Z-Norm -> " + str(full_member_data.shape))
+        if acc_norm:
+            # Z-Normalise - Remove interpersonal differences in movement intensity
+            # print("Shape Before Z-Norm -> " + str(full_member_data.shape))
+            full_member_data = z_norm_accel_data(full_member_data)
+            # print("After Before Z-Norm -> " + str(full_member_data.shape))
         member_data_timed = full_member_data[(start_time):(start_time+duration), :]
     return member_data_timed
 
@@ -87,7 +88,7 @@ def get_temporal_data_in_f_form(group_id="1_000", return_end=False):
     else:
         return start, end-start
 
-def get_accel_data_from_f_form(filename=const.dataset_name, group_id="1_000"):
+def get_accel_data_from_f_form(filename=const.dataset_name, acc_norm=True, group_id="1_000"):
     '''
     returns numpy array - n*t [nFound Participant's Accelero-number of participants, t-time duration]
     '''
@@ -99,7 +100,8 @@ def get_accel_data_from_f_form(filename=const.dataset_name, group_id="1_000"):
     # Init group accel array - np
     group_accel = {}#np.empty((len(group_members), duration), int)
     for member in group_members:
-        member_accel = get_accel_data_from_participant_between(filename=filename, day=day, participant_id=member,
+        member_accel = get_accel_data_from_participant_between(filename=filename, acc_norm=acc_norm,
+                                                               day=day, participant_id=member,
                                                                start_time=start_time,
                                                                duration=duration)
         group_accel[member] = member_accel #np.append(group_accel, member_accel)

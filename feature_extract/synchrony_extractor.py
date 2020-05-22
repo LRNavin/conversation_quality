@@ -25,11 +25,10 @@ def get_mutual_info_between(individual1_acc, individual2_acc, norm=True):
         indiv1_acc = individual1_acc[:,segment]
         indiv2_acc = individual2_acc[:,segment]
         if norm:
-            curr_mi = 0#drv.information_mutual_normalised(indiv1_acc, indiv2_acc, 'SQRT')
+            curr_mi = drv.information_mutual_normalised(indiv1_acc, indiv2_acc, 'SQRT')
         else:
             curr_mi = drv.information_mutual(indiv1_acc, indiv2_acc)
         mi.append(curr_mi)
-
     return mi
 
 def get_timelagged_correlation_between(individual1_acc, individual2_acc, inverted=False, lag=0):
@@ -83,8 +82,11 @@ def get_features_for(individual1_data, individual2_data, features):
     for feature in features:
         synchrony_windowed_feature = []
         for window in individual1_data.keys():
+            # print("Current Window -> " + str(window))
             curr_window_data1 = individual1_data[window]
             curr_window_data2 = individual2_data[window]
+            # print("Member Shape -> " + str(curr_window_data1.shape))
+            # print("Member Shape -> " + str(curr_window_data2.shape))
 
             if feature == "correl":
                 synchrony_windowed_feature.extend(get_correlation_between(curr_window_data1, curr_window_data2))
@@ -100,6 +102,8 @@ def get_features_for(individual1_data, individual2_data, features):
             elif feature == "mimicry":
                 synchrony_windowed_feature.extend(mimicry_extractor.get_mimicry_features(curr_window_data1, curr_window_data2, model_type="sq-distance"))
 
+            # print(feature + " DONE")
+
         synchrony_features.extend(synchrony_windowed_feature)
 
     return np.array(synchrony_features)
@@ -113,7 +117,7 @@ def get_synchrony_features_for(group_accel_data, features=["correl", "lag-correl
             # No Same Person and Not same pair if already calculated # TODO: Remove this same pair check, Useful for assymetric features (DONE)
             if member1 != member2: #and (str(member2)+"_"+str(member1) not in group_pairwise_features.keys()):
                 if len(group_accel_data[member1]) != 0 and len(group_accel_data[member2]) != 0 : #Missing Acc
-                    print("===Synchrony Members - " + str(member1) + " and " + str(member2) + " ===")
+                    # print("===Synchrony Members - " + str(member1) + " and " + str(member2) + " ===")
                     pairwise_features = get_features_for(group_accel_data[member1], group_accel_data[member2], features)
                 else:
                     pairwise_features = np.array([])

@@ -71,7 +71,7 @@ print("~~~~~~~~~~ FINAL PAIRWISE FEATUERS ~~~~~~~~~~")
 print("# Pairwise Features = " + str(len(group_pairwise_features.keys())))
 print("Pairs -> " + str(group_pairwise_features.keys()))
 
-pd.DataFrame.from_dict(group_pairwise_features).to_csv("features_tester.csv", index=False)
+# pd.DataFrame.from_dict(group_pairwise_features).to_csv("features_tester.csv", index=False)
 
 for pair in group_pairwise_features.keys():
     feat_len = len(group_pairwise_features[pair])

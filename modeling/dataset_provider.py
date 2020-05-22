@@ -4,6 +4,9 @@ import constants as const
 
 import numpy as np
 from tqdm import tqdm
+from scipy import stats
+
+group_features = [np.min, np.max, np.mean, np.var, np.median, stats.mode]
 
 # Group-Level Dataset Generation
 def generate_aggregated_group_features_dataset(dataset, missing_data_thresh, agreeability_thresh, annotators, zero_mean):
@@ -15,7 +18,8 @@ def generate_aggregated_group_features_dataset(dataset, missing_data_thresh, agr
 
     X, Y = [], []
     for i, group_id in tqdm(enumerate(filtered_dataset.keys())): # Use filtered Dataset as already filtered for reliability and missings
-        x = group_feat_extractor.aggregate_to_group_features(pairwise_features=filtered_dataset[group_id])
+        x = group_feat_extractor.aggregate_to_group_features(pairwise_features=filtered_dataset[group_id],
+                                                             agg_features=group_features)
         if len(X) == 0:
             X = x
         else:
@@ -32,7 +36,8 @@ def generate_aggregated_indiv_features_dataset(dataset, missing_data_thresh, agr
                                                                               "indiv", annotators, only_involved_pairs, zero_mean)
     X, Y = [], []
     for i, group_indiv_id in tqdm(enumerate(filtered_dataset.keys())): # Use filtered Dataset as already filtered for reliability and missings
-        x = group_feat_extractor.aggregate_to_group_features(pairwise_features=filtered_dataset[group_indiv_id])
+        x = group_feat_extractor.aggregate_to_group_features(pairwise_features=filtered_dataset[group_indiv_id],
+                                                             agg_features=group_features)
         if len(X) == 0:
             X = x
         else:

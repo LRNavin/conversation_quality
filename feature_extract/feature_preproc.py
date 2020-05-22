@@ -12,8 +12,8 @@ def invert_shape_of(group_acc):
     return group_acc
 
 # Extract Channels from Raw Accel => Raw x,y,z , Absolute x,y,z and Magnitude
-def get_raw_accelerometer_for(group_id):
-    group_acc = data_reader.get_accel_data_from_f_form(filename=const.dataset_name, group_id=group_id)
+def get_raw_accelerometer_for(group_id, acc_norm):
+    group_acc = data_reader.get_accel_data_from_f_form(filename=const.dataset_name, acc_norm=acc_norm, group_id=group_id)
     return group_acc
 
 def add_abs_accelerometer_for(group_acc):
@@ -37,8 +37,8 @@ def add_mag_accelerometer_for(group_acc):
     return group_acc
 
 # Get all Channels
-def get_accelerometer_channels_for(group_id, channels=["abs", "mag"]):
-    channled_group_acc = raw_group_acc = get_raw_accelerometer_for(group_id)
+def get_accelerometer_channels_for(group_id, acc_norm, channels=["abs", "mag"]):
+    channled_group_acc = raw_group_acc = get_raw_accelerometer_for(group_id, acc_norm)
     for channel in channels:
         if channel == "abs":
             channled_group_acc = add_abs_accelerometer_for(raw_group_acc)
