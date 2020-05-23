@@ -52,6 +52,17 @@
 #     shutil.copytree(from_folder, to_folder)
 #
 
+
+# Create signals
+# n = 20
+# x = pd.DataFrame(1.0 * np.random.rand(n, 1), range(0, n))
+# y = pd.DataFrame(1.0 * np.random.rand(n, 1), range(0, n))
+#
+
+# x = pd.read_csv('/Users/navinlr/Desktop/sampl1.csv', sep=',', header=None)
+# y = pd.read_csv('/Users/navinlr/Desktop/sampl2.csv', sep=',', header=None)
+
+
 import pingouin as pg
 import pandas as pd
 import numpy as np

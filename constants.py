@@ -45,6 +45,11 @@ features_dataset_path_v2 = main_dataset_storage + "features_dataset_v2.pickle"
 features_dataset_path_v3 = main_dataset_storage + "features_dataset_v3.pickle"
 features_dataset_path_v4 = main_dataset_storage + "features_dataset_v4.pickle"
 features_dataset_path_v5 = main_dataset_storage + "features_dataset_v5.pickle"
+features_dataset_path_v6 = main_dataset_storage + "features_dataset_v6.pickle"
+
+
+features_dataset_path_v7 = main_dataset_storage + "features_dataset_v7.pickle"
+features_dataset_path_v8 = main_dataset_storage + "features_dataset_v8.pickle"
 
 features_tt_path         = main_dataset_storage + "annotations.pickle"
 indiv_tt_X_path          = main_dataset_storage + "indiv_tt_X.csv"
