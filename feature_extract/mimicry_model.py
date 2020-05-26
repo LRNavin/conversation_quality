@@ -48,7 +48,6 @@ def get_asymmetric_mimicry(individual1_acc, individual2_acc, model_type="sq-dist
     return mimicry_features
 
 def get_mimicry_features(individual1_acc, individual2_acc, model_type="sq-distance"):
-    mimicry_features = []
     # Indv1 Lagged Indv2
     mimicry_features = get_asymmetric_mimicry(individual1_acc, individual2_acc, model_type)
     # Indv2 Lagged Indv1

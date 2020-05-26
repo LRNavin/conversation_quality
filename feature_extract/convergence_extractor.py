@@ -71,7 +71,7 @@ def get_global_convergence_between(individual1, individual2):
         indiv1_sample, indiv2_sample = individual1[:,i], individual2[:,i]
         # Split Samples into equal halves @ int(len/2)
         splitter = int(len(indiv1_sample)/2)
-        convergence_i = get_distance_between(indiv1_sample[:splitter],indiv2_sample[:splitter]) - get_distance_between(indiv1_sample[splitter:],indiv2_sample[splitter:])
+        convergence_i = get_distance_between(indiv1_sample[:splitter], indiv2_sample[:splitter]) - get_distance_between(indiv1_sample[splitter:],indiv2_sample[splitter:])
         sym_convergence.append(convergence_i)
     return sym_convergence
 

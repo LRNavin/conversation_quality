@@ -1,18 +1,57 @@
 from pyitlib import discrete_random_variable as drv
 from feature_extract.MutualInformation import MutualInformation # SyncPy model
+from feature_extract.GSI import GSI # GSI SyncPy
+from feature_extract.GrangerCausality import GrangerCausality # GrangerCausality SyncPy
+from feature_extract.Coherence import Coherence
 import feature_extract.mimicry_model as mimicry_extractor
 from sklearn.metrics.cluster import normalized_mutual_info_score, adjusted_mutual_info_score
 
 import numpy as np
 import pandas as pd
 
+def get_syncpy_gsi_between(individual1_acc, individual2_acc):
+    gsi = []
+    # TODO: Tune embedding dimen - currently 2
+    for segment in range(individual1_acc.shape[1]):
+        indiv1_acc = individual1_acc[:, segment]
+        indiv2_acc = individual2_acc[:, segment]
+        curr_gsi = GSI(m=2, t=1, rr=0.1).compute([pd.DataFrame(indiv1_acc, index=np.arange(len(indiv1_acc))),
+                                                  pd.DataFrame(indiv2_acc, index=np.arange(len(indiv2_acc)))])
+        print("GSI = " + str(curr_gsi))
+        gsi.append(curr_gsi)
+    return gsi
+
+def get_syncpy_granger_causality_between(individual1_acc, individual2_acc):
+    causal = []
+    # TODO: Tune Max of 2.5 sec lag
+    for segment in range(individual1_acc.shape[1]):
+        indiv1_acc = individual1_acc[:, segment]
+        indiv2_acc = individual2_acc[:, segment]
+        curr_causal = GrangerCausality(max_lag=45, criterion='bic').compute([pd.DataFrame(indiv1_acc),
+                                                                            pd.DataFrame(indiv2_acc)])['F_value']
+        print("Causal = " + str(curr_causal))
+        causal.append(curr_causal)
+    return causal
+
+def get_syncpy_coherence_between(individual1_acc, individual2_acc):
+    cohe = []
+    for segment in range(individual1_acc.shape[1]):
+        indiv1_acc = individual1_acc[:, segment]
+        indiv2_acc = individual2_acc[:, segment]
+        freq_coherences = Coherence(fs=20.0, NFFT=100).compute([pd.DataFrame(indiv1_acc),
+                                                              pd.DataFrame(indiv2_acc)])['Coherence']
+        print("Coherence = (min) " + str(min(freq_coherences)) + ", (max) " + str(max(freq_coherences)))
+        cohe.extend([min(freq_coherences), max(freq_coherences)])
+    return cohe
+
 def get_syncpy_mutual_info_between(individual1_acc, individual2_acc):
     mi = []
     for segment in range(individual1_acc.shape[1]):
         indiv1_acc = individual1_acc[:, segment]
         indiv2_acc = individual2_acc[:, segment]
-        curr_mi = MutualInformation(n_neighbours=10).compute([pd.DataFrame(indiv1_acc), pd.DataFrame(indiv2_acc)])["MI"]
-        print("SyncPy = " + str(curr_mi))
+        curr_mi = MutualInformation(n_neighbours=10).compute([pd.DataFrame(indiv1_acc),
+                                                              pd.DataFrame(indiv2_acc)])["MI"]
+        print("MI = " + str(curr_mi))
         mi.append(curr_mi)
     return mi
 
@@ -157,6 +196,12 @@ def get_features_for(individual1_data, individual2_data, features):
                 continue
             elif feature == "mimicry":
                 synchrony_windowed_feature.extend(mimicry_extractor.get_mimicry_features(curr_window_data1, curr_window_data2, model_type="sq-distance"))
+            elif feature == "gsi":
+                synchrony_windowed_feature.extend(get_syncpy_gsi_between(curr_window_data1, curr_window_data2))
+            elif feature == "coherence":
+                synchrony_windowed_feature.extend(get_syncpy_coherence_between(curr_window_data1, curr_window_data2))
+            elif feature == "gran-causal":
+                synchrony_windowed_feature.extend(get_syncpy_granger_causality_between(curr_window_data1, curr_window_data2))
 
             # print(feature + " DONE")
 
