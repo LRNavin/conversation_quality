@@ -183,7 +183,7 @@ def get_annotator_wise_responses(annotation_file=constants.group_conq_annot_data
         elif manifestation == "indiv":
             annotator_responses = annotator_responses.drop('Annotator Name', 1).sort_values(by=['Group ID','Individual ID'])[["Group ID",'Individual ID', "indiv_convq"]]
         # print("Number of responses afer clean for " + annotator + " = " + str(len(annotator_responses)))
-        # annotator_responses.to_csv(manifestation+"-annotator"+str(i)+".csv", index=False)
+        annotator_responses.to_csv(manifestation+"-annotator"+str(i)+".csv", index=False)
         convq_scores_dict["annotator"+str(i)]=annotator_responses
     return convq_scores_dict
 

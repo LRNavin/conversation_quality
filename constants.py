@@ -6,6 +6,8 @@ annotations_path    = "annotations/"
 #Temporary Data Storage Path
 temp_storage_path   = "/Users/navinlr/Desktop/Thesis/code_base/conversation_quality/temporary_data_storage/"
 main_dataset_storage= temp_storage_path + "dataset/"
+featset_experiment_dataset_storage = main_dataset_storage + "final-test-featset/"
+
 temp_dataset_store  = temp_storage_path + "analysis_data/"
 temp_fform_store    = temp_dataset_store + "groups.pickle"
 temp_grps_day       = temp_dataset_store + "groups_day"
@@ -57,6 +59,14 @@ features_dataset_path_v12 = main_dataset_storage + "features_dataset_v12.pickle"
 
 features_dataset_path_v13 = main_dataset_storage + "features_dataset_v13.pickle"
 features_dataset_path_v14 = main_dataset_storage + "features_dataset_v14.pickle"
+
+
+featset_experiment_path_w1 = featset_experiment_dataset_storage + "features_dataset_w1.pickle"
+featset_experiment_path_w3 = featset_experiment_dataset_storage + "features_dataset_w3.pickle"
+featset_experiment_path_w5 = featset_experiment_dataset_storage + "features_dataset_w5.pickle"
+featset_experiment_path_w10 = featset_experiment_dataset_storage + "features_dataset_w10.pickle"
+featset_experiment_path_w15 = featset_experiment_dataset_storage + "features_dataset_w15.pickle"
+
 
 features_tt_path         = main_dataset_storage + "annotations.pickle"
 indiv_tt_X_path          = main_dataset_storage + "indiv_tt_X.csv"

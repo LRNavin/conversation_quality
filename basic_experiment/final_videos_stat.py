@@ -28,6 +28,7 @@ if plot_data:
     dur_plt.set(xlabel='Conversation Duration (minutes)', ylabel='# Groups')
     plt.show()
 
+print("Number of Videos = " + str(len(all_durations)))
 print("MIN Duration - " + str(min(all_durations)))
 print("MAX Duration - " + str(max(all_durations)))
 print("MEAN Duration - " + str(np.mean(all_durations)))

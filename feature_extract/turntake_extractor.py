@@ -142,13 +142,18 @@ def get_conv_equality_score_for_group(group_speaking_data):
         return diff
 
     # Current Case - A (Numerator)
+    # print(group_speaking_data.shape)
+    # print(np.sum(group_speaking_data, axis=1))
+
     A = calculate_numerator(np.sum(group_speaking_data, axis=1))
     # Worst Case - E (Denominator)
-    # Only one person talks - Indiv 0 talks throught
+    # Only one person talks - E.g. Indiv 0 talks throught
     temp_worst_case = np.zeros(group_speaking_data.shape[0])
     temp_worst_case[0] = group_speaking_data.shape[1]
+    # print(temp_worst_case)
     E = calculate_numerator(temp_worst_case)
-    return A/E
+    # print(1 - (A/E))
+    return 1 - (A/E)
 
 # 2. Conversation Fluency:
 def get_mean_silence_duration_for_group(group_speaking_data):

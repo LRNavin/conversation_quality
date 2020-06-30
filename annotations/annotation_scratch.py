@@ -3,7 +3,7 @@ import numpy as np
 from scipy import stats
 import os
 
-manifest="group"
+manifest="indiv"
 
 for i in range(3):
     annotator=str(i)

@@ -115,13 +115,13 @@ import constants
 
 
 # features_dataset_v13.pickle [Only Coherenec & Gran-Causal Syncpy Feats & Noramlized & Only Raw]
-_, data = data_gen.extract_and_save_dataset(dest_file=constants.features_dataset_path_v13,
-                                            acc_norm=True,
-                                            channels=["abs", "mag"],
-                                            stat_features=["mean", "var"], spec_features=["psd"],
-                                            windows=[0], step_size=0.5,
-                                            sync_feats=["coherence", "gran-causal"],
-                                            conver_feats=[])
+# _, data = data_gen.extract_and_save_dataset(dest_file=constants.features_dataset_path_v13,
+#                                             acc_norm=True,
+#                                             channels=["abs", "mag"],
+#                                             stat_features=["mean", "var"], spec_features=["psd"],
+#                                             windows=[0], step_size=0.5,
+#                                             sync_feats=["coherence", "gran-causal"],
+#                                             conver_feats=[])
 
 # features_dataset_v14.pickle [Only Coherenec & Gran-Causal Syncpy Feats & Noramlized & Only Window 5]
 # _, data = data_gen.extract_and_save_dataset(dest_file=constants.features_dataset_path_v14,
@@ -131,3 +131,43 @@ _, data = data_gen.extract_and_save_dataset(dest_file=constants.features_dataset
 #                                             windows=[5], step_size=0.5,
 #                                             sync_feats=["coherence", "gran-causal"],
 #                                             conver_feats=["sym-conv", "asym-conv", "global-conv"])
+
+_, data = data_gen.extract_and_save_dataset(dest_file=constants.featset_experiment_path_w1,
+                                            acc_norm=True,
+                                            channels=["abs", "mag"],
+                                            stat_features=["mean", "var"], spec_features=["psd"],
+                                            windows=[1], step_size=0.5,
+                                            sync_feats=["correl", "lag-correl", "mi", "norm-mi", "mimicry"],
+                                            conver_feats=["sym-conv", "asym-conv", "global-conv"])
+
+_, data = data_gen.extract_and_save_dataset(dest_file=constants.featset_experiment_path_w3,
+                                            acc_norm=True,
+                                            channels=["abs", "mag"],
+                                            stat_features=["mean", "var"], spec_features=["psd"],
+                                            windows=[3], step_size=0.5,
+                                            sync_feats=["correl", "lag-correl", "mi", "norm-mi", "mimicry"],
+                                            conver_feats=["sym-conv", "asym-conv", "global-conv"])
+
+_, data = data_gen.extract_and_save_dataset(dest_file=constants.featset_experiment_path_w5,
+                                            acc_norm=True,
+                                            channels=["abs", "mag"],
+                                            stat_features=["mean", "var"], spec_features=["psd"],
+                                            windows=[5], step_size=0.5,
+                                            sync_feats=["correl", "lag-correl", "mi", "norm-mi", "mimicry"],
+                                            conver_feats=["sym-conv", "asym-conv", "global-conv"])
+
+_, data = data_gen.extract_and_save_dataset(dest_file=constants.featset_experiment_path_w10,
+                                            acc_norm=True,
+                                            channels=["abs", "mag"],
+                                            stat_features=["mean", "var"], spec_features=["psd"],
+                                            windows=[10], step_size=0.5,
+                                            sync_feats=["correl", "lag-correl", "mi", "norm-mi", "mimicry"],
+                                            conver_feats=["sym-conv", "asym-conv", "global-conv"])
+
+_, data = data_gen.extract_and_save_dataset(dest_file=constants.featset_experiment_path_w15,
+                                            acc_norm=True,
+                                            channels=["abs", "mag"],
+                                            stat_features=["mean", "var"], spec_features=["psd"],
+                                            windows=[15], step_size=0.5,
+                                            sync_feats=["correl", "lag-correl", "mi", "norm-mi", "mimicry"],
+                                            conver_feats=["sym-conv", "asym-conv", "global-conv"])

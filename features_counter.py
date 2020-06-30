@@ -1,4 +1,4 @@
-num_raw_channels=7
+num_raw_channels=1
 num_base_feats=8
 num_windows=5
 
@@ -8,7 +8,7 @@ used_raw=1
 counter_channel_feats = used_win * num_raw_channels * num_base_feats * num_windows
 counter_raw_feats     = used_raw * (num_raw_channels * 1 * 1)
 
-num_sync_feats=14+3
+num_sync_feats=14
 num_conv_feats=4
 
 counter_sync_channel_feats = (num_sync_feats + num_conv_feats) * counter_channel_feats

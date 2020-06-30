@@ -303,9 +303,9 @@ def plot_pca_loadings(score, coeff, labels=None):
     n = coeff.shape[0]
     scalex = 1.0 / (xs.max() - xs.min())
     scaley = 1.0 / (ys.max() - ys.min())
-    plt.scatter(xs * scalex, ys * scaley,s=4,c='grey', alpha=0.3)
+    plt.scatter(xs * scalex, ys * scaley,s=4,c='cornflowerblue', alpha=0.3)
     plt.grid(True, which='both')
-    for i in range(n):
+    for i in range(n):#, color="cornflowerblue"
         plt.arrow(0, 0, coeff[i, 0], coeff[i, 1], color='black', alpha=0.5)
         if labels is None:
             plt.text(coeff[i, 0] * 1.15, coeff[i, 1] * 1.15, str(i + 1), color='black', ha='center', va='center')
@@ -316,10 +316,10 @@ def plot_eigenvalue_bar_graph(eigen_values):
     print(sum(eigen_values))
     plt.ylabel('% Variance Explained')
     plt.xlabel('# of Componenets')
-    plt.title('PCA Analysis')
+    plt.title('PCA Analysis - Group’s Conversation Quality')
     var = np.cumsum(np.round(eigen_values, decimals=3) * 10)
     plt.plot(var)
-    plt.bar(range(len(eigen_values)),eigen_values*10)
+    plt.bar(range(len(eigen_values)),eigen_values*10, color="cornflowerblue")
 
 def perform_pca_analysis_on(annotation_file=constants.group_conq_annot_data, manifestation="group", annotators=["Nakul", "Swathi", "Divya"]):
     cleaned_annotations = annot_cleaner.derive_convq_scores_for_reponses(annotators, annotation_file, manifestation, calculate_convq=False, reverse_scale=False, zero_mean=False)
@@ -345,7 +345,7 @@ measure="kappa"
 if False:
     manifest="group"
     file=constants.group_conq_annot_data
-    annotators=["Nakul", "Divya"]#, "Swathi"]
+    annotators=["Divya", "Nakul"]#, "Nakul"]
     zero_mean=False
     # "Nakul", "Divya", "Swathi"
 
@@ -373,12 +373,18 @@ if False:
             filtered_ind = np.where(np.array(pairwise_groupwise_score_meaned) >= -10)
             pairwise_groupwise_score_meaned = np.array(pairwise_groupwise_score_meaned)[filtered_ind[0]].tolist()
             final_average_score_all = np.array(final_average_convq)[filtered_ind[0]].tolist()
+            print(pairwise_groupwise_score_meaned)
+            print("Total Count = " + str(len(pairwise_groupwise_score_meaned)))
+            print("Count After Threshold = " + str(sum(np.array(pairwise_groupwise_score_meaned) > 0.2)))
             plt.scatter(pairwise_groupwise_score_meaned, final_average_score_all,s=8,c='b')
+            plt.axvline(x=.2, color='r', label="Kappa threshold", linestyle="--")
+            plt.axhline(y=3., color='cornflowerblue', label="Label threshold", linestyle="--")
             if False:
                 for i, txt in enumerate(groups_label):
                     plt.annotate(txt, (pairwise_groupwise_score_meaned[i],
                                        final_average_score_all[i]))
 
-            plt.ylabel('Mean ConvQ Score - ' + manifest)
+            plt.ylabel('Mean Conversation Quality Score - Individual')
             plt.xlabel('Mean Kappa Score')
+            plt.legend(loc="lower left")
             plt.show()

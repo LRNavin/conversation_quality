@@ -178,10 +178,10 @@ def get_features_for(individual1_data, individual2_data, features):
                 # Max correlation-coeff @ n th lag index (Max "negative" Correl between 2 person 'or' Min "positive" Correl between 2 person)
                 synchrony_windowed_feature.extend(get_min_max_from_lagged_correlations(curr_window_data1,
                                                                                        curr_window_data2, max))
-                # INDEX of Lag, where correlation-coeff is MIN (How much lag is required for max coordination)
+                # INDEX of Lag, where correlation-coeff is MIN (How much lag is required for min coordination)
                 synchrony_windowed_feature.extend(get_min_max_from_lagged_correlations(curr_window_data1,
                                                                                        curr_window_data2, np.argmin))
-                # INDEX of Lag, where correlation-coeff is MAX (How much lag is required for min coordination)
+                # INDEX of Lag, where correlation-coeff is MAX (How much lag is required for max coordination)
                 synchrony_windowed_feature.extend(get_min_max_from_lagged_correlations(curr_window_data1,
                                                                                        curr_window_data2, np.argmax))
                 #+1 Lag -> Lag to INDIV 2 i.e Test for Indiv 2 as follower and Indiv 1 as driver
