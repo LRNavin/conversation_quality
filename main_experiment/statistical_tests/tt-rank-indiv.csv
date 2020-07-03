@@ -1,0 +1,10 @@
+,Feature Name,Spearman Correlation,p-value
+0,conv_eq,0.28856,0.0
+1,#turns,0.17439,0.00488
+2,%talk,0.35031,0.0
+3,mean_turn,0.32392,0.0
+4,mean_silence,-0.22378,0.00028
+5,#bc,0.03029,0.62754
+6,%overlap,-0.1141,0.06675
+7,#suc_interupt,0.00737,0.90603
+8,#un_interupt,0.14446,0.02003

@@ -1,0 +1,8 @@
+,Feature Name,Spearman Correlation,p-value
+0,group_sizes,-0.35229,0.00208
+1,conv_eq,0.10158,0.38912
+2,%silence,0.06321,0.59263
+3,#bc,0.08746,0.4587
+4,%overlap,-0.15949,0.17468
+5,#suc_interupt,-0.00911,0.93863
+6,#un_interupt,0.0205,0.86238
