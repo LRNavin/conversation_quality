@@ -34,21 +34,25 @@ def name_sync_features_for_dataframe(channels, sync_feats, conver_feats, grp_fea
     return feature_names
 
 #Hard-Coded per dataset :( - Bad one Navin
-def get_feature_names_for_dataset_7():
+def get_feature_names_for_dataset_7(manifest):
     return name_sync_features_for_dataframe(channels=["raw", "abs", "mag"],
                                              sync_feats=["correl", "lagcorr", "mi", "mimicry"],
                                              conver_feats=["symconv", "asymconv", "globconv"],
                                              grp_feats=["min", "max", "mean", "var", "median", "mode"])
 
-def get_feature_names_for_dataset_13():
+def get_feature_names_for_dataset_13(manifest):
     return name_sync_features_for_dataframe(channels=["raw", "abs", "mag"],
                                              sync_feats=["coherence", "granger"],
                                              conver_feats=[],
                                              grp_feats=["min", "max", "mean", "var", "median", "mode"])
-def get_feature_names_for_tt():
-    return ["tt-conv_eq", "tt-#turns", "tt-%talk", "tt-mean_turn",
-            "tt-mean_silence", "tt-%silence", "tt-#bc", "tt-%overlap",
-            "tt-#suc_interupt", "tt-#un_interupt"]
+def get_feature_names_for_tt(manifest):
+    if manifest == "indiv":
+        return ["tt-conv_eq", "tt-#turns", "tt-%talk", "tt-mean_turn",
+                "tt-mean_silence", "tt-%silence", "tt-#bc", "tt-%overlap",
+                "tt-#suc_interupt", "tt-#un_interupt"]
+    else:
+        return ["tt-var_#turn", "tt-var_dturn", "tt-conv_eq", "tt-mean_silence",
+                "tt-%silence", "tt-#bc", "tt-%overlap", "tt-#suc_interupt", "tt-#un_interupt"]
 
 
 #Testing
