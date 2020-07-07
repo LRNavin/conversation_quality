@@ -2,33 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50d676cd-c199-4a32-8ab8-1860606fb780" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/main_experiment/features_experiment/group/.ipynb_checkpoints/featset-size_experiment-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/features_experiment/group/.ipynb_checkpoints/group_feat_experiment-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/features_experiment/group/.ipynb_checkpoints/window-size_experiment-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/features_experiment/group/featset-size_experiment.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/features_experiment/group/group_feat_experiment.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/features_experiment/group/window-size_experiment.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/features_experiment/indiv/featset-size_experiment.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/features_experiment/indiv/group_feat_experiment.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/features_experiment/indiv/window-size_experiment.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/predicitve_modeling/.ipynb_checkpoints/group-pred-model-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/predicitve_modeling/group-pred-model.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.ipynb_checkpoints/example_group_lasso-checkpoint.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example_group_lasso.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/.ipynb_checkpoints/LASSO-group-checkpoint.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/.ipynb_checkpoints/LASSO-indiv-checkpoint.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/LASSO-group.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/LASSO-indiv.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/lasso-full-model-group.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/lasso-full-model-indiv.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/annotations/annotation_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/annotations/annotation_cleaner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feature_namer_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_namer_script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/features_experiment/featset-size_experiment.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/features_experiment/group_feat_experiment.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/features_experiment/indiv-annotator0.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/features_experiment/indiv-annotator1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/features_experiment/window-size_experiment.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/predicitve_modeling/.ipynb_checkpoints/baseline-improv-v5-Copy1-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/predicitve_modeling/baseline-improv-v5-Copy1.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/predicitve_modeling/group-annotator0.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/predicitve_modeling/group-annotator1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/predicitve_modeling/indiv-annotator0.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/predicitve_modeling/indiv-annotator1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/statistical_tests/indiv-annotator0.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/statistical_tests/indiv-annotator1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/statistical_tests/tt_vs_convq-group.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/tt_vs_convq-group.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
