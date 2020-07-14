@@ -47,12 +47,10 @@ def get_feature_names_for_dataset_13(manifest):
                                              grp_feats=["min", "max", "mean", "var", "median", "mode"])
 def get_feature_names_for_tt(manifest):
     if manifest == "indiv":
-        return ["tt-conv_eq", "tt-#turns", "tt-%talk", "tt-mean_turn",
-                "tt-mean_silence", "tt-%silence", "tt-#bc", "tt-%overlap",
+        return ["tt-conv_eq", "tt-%silence", "tt-#bc", "tt-%overlap",
                 "tt-#suc_interupt", "tt-#un_interupt"]
     else:
-        return ["tt-var_#turn", "tt-var_dturn", "tt-conv_eq", "tt-mean_silence",
-                "tt-%silence", "tt-#bc", "tt-%overlap", "tt-#suc_interupt", "tt-#un_interupt"]
+        return ["tt-conv_eq", "tt-%silence", "tt-#bc", "tt-%overlap", "tt-#suc_interupt", "tt-#un_interupt"]
 
 
 #Testing

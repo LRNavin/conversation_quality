@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50d676cd-c199-4a32-8ab8-1860606fb780" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.ipynb_checkpoints/example_group_lasso-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example_group_lasso.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/.ipynb_checkpoints/LASSO-group-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/.ipynb_checkpoints/LASSO-indiv-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/LASSO-group.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/LASSO-indiv.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/lasso-full-model-group.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/lasso-full-model-indiv.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/.ipynb_checkpoints/LASSO-indiv-Copy1-checkpoint.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/LASSO-indiv-Copy1.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_experiment/statistical_tests/tt_vs_convq-group.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/tt_vs_convq-group.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example_group_lasso.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/example_group_lasso.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/feature_namer_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/feature_namer_script.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/statistical_tests/LASSO-indiv.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/LASSO-indiv.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/statistical_tests/lasso-full-model-group.csv" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/lasso-full-model-group.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_experiment/statistical_tests/lasso-full-model-indiv.csv" beforeDir="false" afterPath="$PROJECT_DIR$/main_experiment/statistical_tests/lasso-full-model-indiv.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
